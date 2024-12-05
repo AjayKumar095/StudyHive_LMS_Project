@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import aauthenticate, login, logout
 from django.contrib.auth.models import User
@@ -87,12 +87,13 @@ def userlogout(request):
 def course_info(request):
     try:
         if request.method == 'POST':
-            course_id = request.POST.get('course_id')
-            print(course_id)
+            course_id = request.POST.get_ob('course_id')
             current_course = CourseDetails.objects.get(id=course_id)
-            
+            current_course_data = {
+                'course_info' : current_course 
+            }
     
-            return HttpResponse(f'{current_course.course_title}')
+            return render(request=request, template_name='CourseInfo.html', context=current_course_data)
         
         else:
             return HttpResponse('Something going wrong')

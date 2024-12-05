@@ -204,7 +204,7 @@
       <ul class="navbar-nav me-auto mb-1 mt-2 mb-lg-0">
     
         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('StudyHiveHomePage')}}">Home</a>
+          <a class="nav-link" href="">Home</a>
         </li>
       </ul> 
   
@@ -217,21 +217,20 @@
      <!--Section jumbtron with image col-xxl-8 -->
         <div class="container  col px-1 py-2 " data-bs-theme="dark">
           <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-              <img src="{{url_for('static', filename='Assets/background.jpg')}}" class="d-block mx-lg-auto img-fluid" alt="Themes image" width="400" height="400" loading="lazy">
-            </div>
-            <div class="col-lg-6">
-              {% if course_info %}
-                {% for data in course_info %}
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{data.course_name}}</h1>
-                <p class="lead text-body-emphasis">{{data.course_short_des}}</p>
-                <p class="lead text-body-emphasis"><svg class="bi me-1  theme-icon" width="1em" height="1em"><use xlink:href="#rupee"/></svg><b>{{data.course_prise}}</b></p>
+
+          {% if course_info %}
+                <div class="col-10 col-sm-8 col-lg-6">
+                  <img src="{{course_info.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="Themes image" loading="lazy">
+                </div>
+                <div class="col-lg-6">
+          
+                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{course_info.course_title}}</h1>
+                <p class="lead text-body-emphasis">{{course_info.course_description}}</p>
+                <p class="lead text-body-emphasis"><svg class="bi me-1  theme-icon" width="1em" height="1em"><use xlink:href="#rupee"/></svg><b>{{course_info.course_price}}</b></p>
                
                 <div class="d-md-flex justify-content-md-start">
                   <button type="submit" class="btn btn-warning  icon-link-hover btn-lg px-4 me-md-2" data-bs-toggle="modal" data-bs-target="#modalTour">Join Now <svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#arrow"/></svg></button>
                 </div>
-            
-                {% endfor %}
               {% else %}
                 <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Stay On Top With Our Affordable Courses</h1>
                 <p class="lead text-body-emphasis">StudyHive is your ultimate destination for enhancing your skills. Maximize the value of your time and resources with our job-ready courses and advanced technology, all offered at the most affordable prices.</p>
@@ -247,7 +246,6 @@
 
         <!--Model to enroll in course -->
       {% if course_info %}
-        {% for data in course_info %}
         <div class="modal p-4 py-md-5" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true" tabindex="-1"  id="modalTour">
           <div class="modal-dialog" >
             <div class="modal-content rounded-4 shadow">
@@ -260,11 +258,10 @@
                  <div class=" modal-content mt-1 border-0">
                   <div class="row p-1">
                     <div class="col-sm">
-                      <svg class="bi me-1 theme-icon" width="100%" height="150" style="fill: rgb(11, 149, 8)"><use xlink:href="#rupee"/></svg>
-                      <!--<img src="thumbnail_studyhive\1.png" width="100%" height="100" alt="">-->
+                      <img src="{{course_info.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="Themes image" loading="lazy">
                     </div>
                     <div class="col-sm ">
-                      <h4 class="fw-bold">{{data.course_name}}</h4>
+                      <h4 class="fw-bold">{{course_info.course_title}}</h4>
                     </div>
                   </div>
                    
@@ -272,7 +269,7 @@
                        <div class="row">
                           <div class="col p-1" style="text-align: right;"><p class="text-body-emphasis">Prise</p></div>
                           <div class="col p-1">
-                            <p class="text-body-emphasis" style="text-align: right;"><svg class="bi me-1 theme-icon" width="24" height="24" style="fill: rgb(11, 149, 8)"><use xlink:href="#rupee"/></svg> {{data.course_prise}}</p>
+                            <p class="text-body-emphasis" style="text-align: right;"><svg class="bi me-1 theme-icon" width="24" height="24" style="fill: rgb(11, 149, 8)"><use xlink:href="#rupee"/></svg> {{course_info.course_title}}</p>
                           </div>
                        </div>
         
@@ -286,13 +283,14 @@
                      <div class="row border-top">
                       <div class="col p-1" style="text-align: right;"><p class="text-body-emphasis">Total</p></div>
                       <div class="col p-1">
-                        <p class="text-body-emphasis" style="text-align: right;"><svg class="bi me-1 theme-icon" width="24" height="24" style="fill: rgb(11, 149, 8)"><use xlink:href="#rupee"/></svg> {{data.course_prise}}</p>
+                        <p class="text-body-emphasis" style="text-align: right;"><svg class="bi me-1 theme-icon" width="24" height="24" style="fill: rgb(11, 149, 8)"><use xlink:href="#rupee"/></svg> {{course_info.course_price}}</p>
                       </div>
                    </div>
                    </div>
 
                 <form action="" method='post'>
-                  <input type='hidden' name='coursetoenroll' value={{data.course_id}}>
+                  {% csrf_token %}
+                  <input type='hidden' name='coursetoenroll' value={{course_info.id}}>
                   <div class="row p-1">
                     <div class="col-sm m-auto p-1 d-flex flex-column">
                         <button class="btn btn-outline-warning" data-bs-dismiss="modal" type="button">Cancel</button>
@@ -308,7 +306,7 @@
             </div>
           </div>
         </div>
-        {% endfor %}
+     
       {% endif %}
 
   </div>
@@ -320,9 +318,7 @@
       <div class="info-row">
         <div class="info-box bg-success-subtle rounded-1">
           {% if course_info %}
-            {% for data in course_info %}
-              <h5>{{data.course_starting_date}}</h5>
-            {% endfor %}
+              <h5>{{course_info.course_startdata}}</h5>
           {% else %}
             <h5></h5>
           {% endif %}
@@ -334,9 +330,7 @@
         </div>
         <div class="info-box bg-danger-subtle rounded-1">
           {% if course_info %}
-            {% for data in course_info %}
-              <h5>{{data.course_language}}</h5>
-            {% endfor %}
+              <h5>{{course_info.course_language}}</h5>
           {% else %}
             <h5></h5>
           {% endif %}
@@ -344,9 +338,7 @@
         </div>
         <div class="info-box bg-warning-subtle rounded-1">
           {% if course_info %}
-            {% for data in course_info %}
-              <h5>{{data.course_duration}} Months</h5>
-            {% endfor %}
+              <h5>{{course_info.course_duration}} Months</h5>
           {% else %}
             <h5></h5>
           {% endif %}
@@ -367,10 +359,8 @@
 
            <div class="col-lg-6">
              <h2 class="display-7 fw-bold text-body-emphasis lh-1 mb-3 p-3" style="border-left: 10px solid rgb(255, 77, 0);">About this (couse name)</h2>
-             {% if course_info %}
-                {% for data in course_info %}
-                <p class="lead text-body-emphasis">{{data.course_long_des}}</p>
-                {% endfor %}
+             {% if course_info %}          
+                <p class="lead text-body-emphasis">{{course_info.course_long_description}}</p>
               {% else %}
               <p class="lead text-body-emphasis">StudyHive is your ultimate destination for enhancing your skills. Maximize the value of your time and resources with our job-ready courses and advanced technology, all offered at the most affordable prices.</p>
               {% endif %}
@@ -441,15 +431,15 @@
       <div class="row row-cols-1 pb-2">
         <div class="col rounded-1 p-2">
           <ul type="dics" class=" list-group mb-3 list-group-flush overflow-auto"  style=" max-height: 300px;">
-            {% if course_info %}
-              {% for data in course_info %}
+            {% if course_info1 %}
                   {% for list in data.course_modules %}
                     <li class=" list-group-item">
                       <svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#arrow"/></svg>
                       {{ list }}
                     </li>
                   {% endfor %}
-              {% endfor %}
+              {% else %}
+                 add information here
             {% endif %}
         </ul>
       </div>
