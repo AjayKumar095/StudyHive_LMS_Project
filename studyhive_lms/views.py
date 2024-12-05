@@ -14,7 +14,6 @@ def index(request):
     coursedetails = CourseDetails.objects.all()
     return render(request=request, template_name="index.html",  context={"coursedetails": coursedetails})
 
-
 ## user login page
 def user(request):
     try:
@@ -24,7 +23,6 @@ def user(request):
         return HttpResponse(content=f"error {e}")
     
 ## user sign up page
-
 def usersignup(request):
     
     try:
@@ -85,6 +83,21 @@ def userlogout(request):
     logout(request=request)
     return redirect('index')
                
-                    
+## course information page
+def course_info(request):
+    try:
+        if request.method == 'POST':
+            course_id = request.POST.get('course_id')
+            print(course_id)
+            current_course = CourseDetails.objects.get(id=course_id)
+            
+    
+            return HttpResponse(f'{current_course.course_title}')
+        
+        else:
+            return HttpResponse('Something going wrong')
+    
+    except Exception as e:
+        return HttpResponse(f'Error {e}')                  
                 
     
