@@ -158,12 +158,12 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">Courses</a>
           <ul class="dropdown-menu dropdown-menu-dark">
-            <li><a class="dropdown-item" href="#">Python Foundation</a></li>
-            <li><a class="dropdown-item" href="#">UI/UX</a></li>
-            <li><a class="dropdown-item" href="#">Web Developer</a></li>
-            <li><a class="dropdown-item" href="#">Data Analytics</a></li>
-            <li><a class="dropdown-item" href="#">DSA With Python</a></li>
-            <li><a class="dropdown-item" href="#">Backend Development</a></li>
+            {% if coursedetails %}
+               {% for course in coursedetails %}
+                <li><a class="dropdown-item" href="#">{{course.course_title}}</a></li>
+            
+               {% endfor %}
+            {% endif %}
           </ul>
         </li>
         <li class="nav-item ">
@@ -253,17 +253,18 @@
 <!-- Section course display-->  
 
   <div class="album py-3 ">
-      
     <div class="container" id="courses">
       <h2 class="pb-2 border-bottom">Explore Our Courses</h2>
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-5 mb-5">
 
+       {% if  coursedetails %}
+       {% for data in  coursedetails %}
         <div class="col">
           <div class="card shadow-sm">
-                
-             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+            <img src="{{data.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="{{data.course_title}}" loading="lazy">
+          
               <div class="card-body">
-                <h6 class="pb-1">course name</h6>
+                <h6 class="pb-1">{{data.course_title}}</h6>
                 <div class="d-flex justify-content-between align-items-center">
                   <form action="#" method="post">
                     <input type='hidden' value="cousename" name='course_name'>
@@ -273,7 +274,9 @@
               </div>
           </div>
         </div>
-      
+        {% endfor %}
+        {% endif %}
+        
       </div>
     </div>
   </div>

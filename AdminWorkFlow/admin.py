@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.contrib.admin.sites import site
-from AdminWorkFlow.models import indexdetails
+from AdminWorkFlow.models import CourseDetails
 
 ## Admin work
 
-class indexdetailsAdmin(admin.ModelAdmin):
-    list_display = ('course_title', 'course_description', 'course_thumbnail')
+class coursedetailsAdmin(admin.ModelAdmin):
+    list_display = ('course_title', 'course_price', 'course_language',
+                    'course_duration', 'course_startdata',  'course_description',
+                    'course_long_description', 'course_thumbnail')
     
 
-admin.site.register(indexdetails, indexdetailsAdmin)    
+admin.site.register(CourseDetails, coursedetailsAdmin)    

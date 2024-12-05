@@ -6,11 +6,13 @@ from django.contrib.auth.models import User
 from django.contrib import  messages
 from django.contrib.auth import login
 from django.contrib.auth.hashers import check_password
+from AdminWorkFlow.models import CourseDetails
 
 
 ## index page
 def index(request):
-    return render(request=request, template_name="index.html")
+    coursedetails = CourseDetails.objects.all()
+    return render(request=request, template_name="index.html",  context={"coursedetails": coursedetails})
 
 
 ## user login page
