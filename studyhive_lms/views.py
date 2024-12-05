@@ -87,7 +87,7 @@ def userlogout(request):
 def course_info(request):
     try:
         if request.method == 'POST':
-            course_id = request.POST.get_ob('course_id')
+            course_id = request.POST.get('course_id')
             current_course = CourseDetails.objects.get(id=course_id)
             current_course_data = {
                 'course_info' : current_course 
