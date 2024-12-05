@@ -1,0 +1,20 @@
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+     background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #ffc107;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+/* Custom Scrollbar for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #ffc107 #f1f1f1;
+}

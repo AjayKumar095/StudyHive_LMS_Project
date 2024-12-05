@@ -1,0 +1,10 @@
+pymongo
+gunicorn
+Django
+djangorestframework
+psycopg2
+django-cors-headers
+Pillow
+## super user password ajay95184!@#
+## test username vijay009, password = test123 or 123test 
+
