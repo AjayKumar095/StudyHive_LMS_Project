@@ -15,7 +15,7 @@ class CourseDetails(models.Model):
     course_long_description = models.TextField(max_length=300)
     course_price = models.FloatField(max_length=6)
     course_language = models.CharField(max_length=20, choices=course_language_choice, default='English')
-    course_duration = models.IntegerField(max_length=2)
+    course_duration = models.IntegerField()
     course_startdata = models.DateField()
     course_thumbnail = models.ImageField(upload_to='thumbnails/')
     created_at = models.DateTimeField(auto_now_add=True)
