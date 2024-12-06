@@ -157,3 +157,32 @@ def mycourse(request):
     
     except Exception as e:
         return HttpResponse(f'Error {e}')
+
+## my profile page
+def myprofile(request):
+    try:
+        if not request.user.is_authenticated:
+            return redirect('user')
+        
+        return render(request=request, template_name='My_profile.html')
+        
+    except Exception as e :
+        return HttpResponse(f'Error {e}')
+
+## delete user and his/her data.
+def deleteuser(request):
+    try:
+        if not request.user.is_authenticated:
+            return redirect('user')
+        
+        if request.method == "POST":
+            username = request.POST.get('to_delete_user')
+            User.objects.filter(username=username).delete()
+            return redirect('index')
+        else:
+            return HttpResponse('error while deleting user.')
+        
+    except Exception as e:
+        return HttpResponse(f'Error {e}')
+    
+    
