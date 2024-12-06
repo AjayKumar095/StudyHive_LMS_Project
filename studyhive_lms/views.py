@@ -142,9 +142,18 @@ def mycourse(request):
         
         user_id = request.user.id
         my_purchase = course_purchase_by_user.objects.filter(user_id=user_id)
+        
+        course_id_list=[]
         for data in my_purchase:
-            print(" details = ",data.user_id)
-            print(" details = ",data.course_id)
-        return HttpResponse(f'we got data sucessfully.')
+            course_id_list.append(data.course_id)
+            
+        purchased_courses = CourseDetails.objects.filter(id__in=course_id_list)
+        
+        purchased_courses_data = {
+            'purchased_courses': purchased_courses
+        }
+        
+        return render(request=request, template_name='my_course.html', context=purchased_courses_data)
+    
     except Exception as e:
         return HttpResponse(f'Error {e}')
