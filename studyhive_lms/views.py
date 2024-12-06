@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from django.contrib import  messages
 from django.contrib.auth import login
 from django.contrib.auth.hashers import check_password
-from AdminWorkFlow.models import CourseDetails, course_purchase_by_user
+from AdminWorkFlow.models import CourseDetails
+from AdminWorkFlow.models import course_purchase_by_user
+from AdminWorkFlow.models import Userquery
 
 
 ## index page
@@ -183,6 +185,17 @@ def deleteuser(request):
     except Exception as e:
         return HttpResponse(f'Error {e}')
 
+## user help page.
+def userhelp(request):
+    try:
+        if not request.user.is_authenticated:
+            return redirect('user')
+        
+        return render(request=request, template_name='support_page.html')
+    
+    except Exception as e:
+        return HttpResponse(f'Error {e}')
+        
 ## user support page
 def userquery(request):
     
@@ -197,7 +210,15 @@ def userquery(request):
             query_type = request.POST.get('Querytype')
             query = request.POST.get('UserQuery') 
             
-            return HttpResponse(f'Username = { username}, Email = {email}, query type = {query_type}, Query = {query}')
+            Userquery.objects.create(
+                username=username,
+                email=email,
+                query_type=query_type,
+                query=query
+            )
+            messages.success(request, 'Your query has been submitted. We will reach you within 24 hours.')
+
+            return redirect('userhelp')
         
         else:
             return HttpResponse("Error while collecting the user query")     

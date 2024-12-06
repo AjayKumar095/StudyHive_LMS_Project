@@ -33,7 +33,8 @@ urlpatterns = [
     path("mycourses/", views.mycourse, name='mycourses'),
     path("myprofile/", views.myprofile, name='myprofile'),
     path("deleteuser/", views.deleteuser, name='deleteuser'),
-    path('userhelp/', views.userquery, name='userhelp')
+    path('userhelp/', views.userhelp, name='userhelp'),
+    path("userquery/", views.userquery, name='userquery')
 ]
 
 

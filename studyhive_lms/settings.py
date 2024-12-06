@@ -50,6 +50,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# Message storage configuration (optional, default is session storage)
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 ROOT_URLCONF = "studyhive_lms.urls"
 
 TEMPLATES = [
