@@ -103,12 +103,15 @@ def course_info(request):
         return HttpResponse(f'Error {e}')                  
                 
 ## course purchase :
-
-@login_required
 def purchase_course(request):
     
     try:
         if request.method == "POST":
+            
+            ## chech the user is logged in or not.
+            if not request.user.is_authenticated:
+                return redirect('user')
+            
             course_id = int(request.POST.get('course_id'))
             print(f'Course id = {course_id} and type of = {type(course_id)}')
             course = get_object_or_404(CourseDetails, id=course_id)
@@ -123,10 +126,25 @@ def purchase_course(request):
                 course = course,
                 price = course.course_price
             )
-            
-            return HttpResponse('course purchased successful')
+        
+            return redirect('mycourses')
         else :
             return HttpResponse('Error while purchasing course')   
     
     except Exception as e:
         return HttpResponse(f'Error {e}')  
+
+## my course page
+def mycourse(request):
+    try:
+        if not request.user.is_authenticated:
+            return redirect('user')
+        
+        user_id = request.user.id
+        my_purchase = course_purchase_by_user.objects.filter(user_id=user_id)
+        for data in my_purchase:
+            print(" details = ",data.user_id)
+            print(" details = ",data.course_id)
+        return HttpResponse(f'we got data sucessfully.')
+    except Exception as e:
+        return HttpResponse(f'Error {e}')
