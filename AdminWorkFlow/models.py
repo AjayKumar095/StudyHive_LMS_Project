@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # # model to add courese detail to index page
 
@@ -26,3 +27,12 @@ class CourseDetails(models.Model):
     
 
     
+class course_purchase_by_user(models.Model):
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(CourseDetails, on_delete=models.CASCADE, related_name='Purchased_course_id')
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Course price
+    purchase_date = models.DateTimeField(auto_now_add=True)  # Auto-add timestamp
+
+    def __str__(self):
+        return f"{self.user.username} purchased {self.course.name}"

@@ -2,11 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import aauthenticate, login, logout
+from  django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import  messages
 from django.contrib.auth import login
 from django.contrib.auth.hashers import check_password
-from AdminWorkFlow.models import CourseDetails
+from AdminWorkFlow.models import CourseDetails, course_purchase_by_user
 
 
 ## index page
@@ -87,7 +88,7 @@ def userlogout(request):
 def course_info(request):
     try:
         if request.method == 'POST':
-            course_id = request.POST.get('course_id')
+            course_id = int(request.POST.get('course_id'))
             current_course = CourseDetails.objects.get(id=course_id)
             current_course_data = {
                 'course_info' : current_course 
@@ -101,4 +102,31 @@ def course_info(request):
     except Exception as e:
         return HttpResponse(f'Error {e}')                  
                 
+## course purchase :
+
+@login_required
+def purchase_course(request):
     
+    try:
+        if request.method == "POST":
+            course_id = int(request.POST.get('course_id'))
+            print(f'Course id = {course_id} and type of = {type(course_id)}')
+            course = get_object_or_404(CourseDetails, id=course_id)
+            print(f'course get = { course}')
+            ## check if user already purchase the course or not
+            if course_purchase_by_user.objects.filter(user=request.user, course =course).exists():
+                return HttpResponse('You have already purchased this course!')
+            
+            # create a new purchaase entry 
+            course_purchase_by_user.objects.create(
+                user=request.user,
+                course = course,
+                price = course.course_price
+            )
+            
+            return HttpResponse('course purchased successful')
+        else :
+            return HttpResponse('Error while purchasing course')   
+    
+    except Exception as e:
+        return HttpResponse(f'Error {e}')  
