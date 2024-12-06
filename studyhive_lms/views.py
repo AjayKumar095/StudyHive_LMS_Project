@@ -182,5 +182,26 @@ def deleteuser(request):
         
     except Exception as e:
         return HttpResponse(f'Error {e}')
+
+## user support page
+def userquery(request):
     
+    try:
+        if not request.user.is_authenticated:
+            return redirect('user')
+        
+        if request.method == "POST":
+            
+            username = request.POST.get('Username')  
+            email = request.POST.get('UserEmail')
+            query_type = request.POST.get('Querytype')
+            query = request.POST.get('UserQuery') 
+            
+            return HttpResponse(f'Username = { username}, Email = {email}, query type = {query_type}, Query = {query}')
+        
+        else:
+            return HttpResponse("Error while collecting the user query")     
+    
+    except Exception as e:
+        return HttpResponse(f'Error {e}')
     

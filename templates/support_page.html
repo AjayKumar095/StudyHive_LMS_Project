@@ -3,20 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='Assets/mortarboard-fill.svg')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <title>StudyHive - My Profile</title>
-    <link type='text/css' rel="stylesheet" href="{{url_for('static', filename='StyleSheets/offcanvas-navbar.css')}}" >
-    <link type='text/css' rel="stylesheet" href="{{url_for('static', filename='StyleSheets/custom_scroller.css')}}" >
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'Assets\mortarboard_fill.svg' %}">
+    <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\custom_scroller.css' %}">
+    <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\offcanvas_navbar.css' %}">
+
+    
 </head>
 <body>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+        <symbol id="file-earmark-text" viewBox="0 0 16 16">
+          <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+          <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+        </symbol>
+        <symbol id="list" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </symbol>
         <symbol id="logo" viewBox="0 0 16 16">
           <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
         <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
         </symbol>
+        <symbol id="search" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </symbol>
+      
+        <symbol id="profile" viewBox="0 0 16 16">
+          <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+        </symbol>
+        <symbol id="help" viewBox="0 0 16 16">
+          <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+        </symbol>
+        <symbol id="book" viewBox="0 0 16 16">
+          <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+        </symbol>
+        <symbol id="logout" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+          <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+        </symbol>
+        <symbol id="arrow" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+        </symbol>
+        <symbol id="arrow_graph" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+        </symbol>
+  
         <symbol id="github" viewBox="0 0 16 16">
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
         </symbol>
@@ -36,81 +72,85 @@
           <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto mb-1 mt-2 mb-lg-0">
               <li class="nav-item ">
-                <a class="nav-link"  aria-current="page" href="{{url_for('StudyHiveHomePage')}}">Home</a>
+                <a class="nav-link"  aria-current="page" href="{% url "index" %}">Home</a>
               </li>
             </ul> 
+          
+            {% if user.is_authenticated  %}
+            <div class="nav-item dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#profile"/></svg>
+                </button>
+                <ul class="dropdown-menu text-small">
+                  <li class="ms-2 mb-0" style="color: rgb(255, 77, 0);"><i><h6>Hey</h6></i></li>
+                  <li class="ms-2 mb-0" style="color: rgb(41, 41, 41);">{{user.username}}</li>
+                  <li><hr class="dropdown-divider ms-1 me-1 mb-0"></li>
+                  <li><a class="dropdown-item" href="/mycourses/"><svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#book"/></svg>My Courses</a></li>
+                  <li><a class="dropdown-item " href="/myprofile/"><svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#profile"/></svg>My Profile</a></li>
+                  <li><a class="dropdown-item active" href="#"><svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#help"/></svg>Help</a></li>
+                  <li><a class="dropdown-item" href="/userlogout/"><svg class="bi me-2  theme-icon" width="1em" height="1em"><use xlink:href="#logout"/></svg>Sign out</a></li>
+                </ul>
+              </div>
+            {% endif %}
+
           </div>
         </div>
       </nav>
-
 <main>
-  {% if confirmation_msg %}
-    <div class=" container p-2 mt-3 mb-3">
-      <p class="lead text-body-emphasis">{{confirmation_msg}}</p>
-    </div>
-  {% endif %}
 
-
+  {% if user.is_authenticated  %}
     <div class=" container p-2 mt-3 mb-3">
         <h2 class="h2 border-bottom p-2 mb-4 mt-2">Support Team</h2>
-        <form action="" method="post">
+        <form action="/userhelp/" method="post">
+          {% csrf_token %}
         <div class=" container p-1 ">
             <div class="row mb-2 p-2">
                 <div class="col-sm p-1">
                    <label for="Name" class=" form-label">Name</label>
-                   <input type="text" class=" form-control" name="Name"  required>
+                   <input type="text" class=" form-control" name="Name" value="{{user.username}}"  disabled>
                 </div>
-                <div class="col-sm p-1 ">
-                  <label for="UserEmail" class=" form-label">Email</label>
-                 <input type="email" class=" form-control" name="UserEmail"  required>
+
+                <div class="col-sm p-1">
+                  <label for="Querytype">What type of support do you need?</label>
+                  <select id="support-query" name="Querytype" required>
+                     <option value="" selected disabled>-- Select --</option>
+                      <option value="account-issues">Account Issues</option>
+                      <option value="technical-support">Technical Support</option>
+                      <option value="course-enrollment">Course Enrollment</option>
+                      <option value="payment-issues">Payment Issues</option>
+                      <option value="content-access">Content Access Problems</option>
+                      <option value="certificate-issues">Certificate Issues</option>
+                      <option value="general-inquiries">General Inquiries</option>
+                      <option value="feedback-suggestions">Feedback or Suggestions</option>
+                      <option value="other">Other</option>
+                  </select>
               </div>
+
               <div class="col-sm p-1 ">
-                  <label for="UserContactNo" class=" form-label">Contact No.</label>
-                 <input type="number" class=" form-control" name="UserContactNo" required>
-              </div>
+                <label for="UserEmail" class=" form-label">Email</label>
+               <input type="email" class=" form-control" name="UserEmail"  required>
             </div>
-            <div class="row mb-2 p-2">
-              <div class="col-sm p-1">
-                <label for="CourseEnrolled" class="form-label">Select Course</label>
-                <select name="CourseEnrolled" class="form-select" id="" required>
-                    <option value="" selected disabled>-- Select --</option>
-                    <option value="Python">Python</option>
-                    <option value="BackendDevelopment">Backend Development</option>
-                    <option value="WebDevelopment">Web Development</option>
-                    <option value="DataBase">Data Base</option>
-                    <option value="None">Not Enrolled</option>
-                </select>
-            </div>
-            <div class="col-sm p-1">
-              <label for="QueryType" class="form-label">Query Type</label>
-              <select name="QueryType" class="form-select" id="" required>
-                  <option value="" selected disabled>-- Select --</option>
-                  <option value="Student Problems">Student Problem Doubts</option>
-                  <option value="Course Material">Course Material Issues</option>
-                  <option value="Assignment Help">Assignment Help</option>
-                  <option value="Project Guidance">Project Guidance</option>
-                  <option value="Payment Issues">Payment Issues</option>
-                  <option value="Technical Support">Technical Support</option>
-                  <option value="Other">Other</option>
-              </select>
           </div>
-            </div>
+      
             <div class="row mb-2 p-2">
                 <div class="col-sm p-1 ">
-                    <label for="Query" class=" form-label">Describe Your Query</label>
-                    <textarea name="Query" class=" form-control" required></textarea>
+                    <label for="UserQuery" class=" form-label">Describe Your Query</label>
+                    <textarea name="UserQuery" class=" form-control" required></textarea>
                 </div>
             </div>
+
             <div class="row mb-2 p-2">
                 <div class="col-sm p-1 ">
                     <button type="submit" class="btn btn-primary">Submit</button>
                  </div>
+                <div class="col-sm p-1 ">
+                   <input type="hidden" class="form-control" value="{{user.username}}" name="Username">
+                </div>
             </div>
         </div>
       </form>
     </div>
-
-   
+    {% endif %}
 
 <!--Section Footer-->
 <div class="container-fluid " >
@@ -127,8 +167,9 @@
       </ul>
     </footer>
   </div>
-
 </main>
-<script src="{{url_for('static', filename='Scripts/offcanvas-navbar.js')}}"></script>   
+
+{% load static %}
+<script src="{% static 'Scripts\offcanvas-navbar.js' %}"></script>   
 </body>
 </html>

@@ -32,7 +32,8 @@ urlpatterns = [
     path('purchase_course/', views.purchase_course, name='purchase_course'),
     path("mycourses/", views.mycourse, name='mycourses'),
     path("myprofile/", views.myprofile, name='myprofile'),
-    path("deleteuser/", views.deleteuser, name='deleteuser')
+    path("deleteuser/", views.deleteuser, name='deleteuser'),
+    path('userhelp/', views.userquery, name='userhelp')
 ]
 
 

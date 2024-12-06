@@ -26,7 +26,7 @@ class CourseDetails(models.Model):
         return self.course_title
     
 
-    
+## model for course purchase    
 class course_purchase_by_user(models.Model):
     
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -36,3 +36,14 @@ class course_purchase_by_user(models.Model):
 
     def __str__(self):
         return f"{self.user.username} purchased {self.course.name}"
+    
+
+## model for user help or query
+class Userquery(models.Model):
+    
+    username = models.CharField(max_length=25)
+    email = models.EmailField()
+    query_type = models.CharField(max_length=50)
+    query = models.TextField()
+    Date = models.DateField(auto_now_add=True)
+    

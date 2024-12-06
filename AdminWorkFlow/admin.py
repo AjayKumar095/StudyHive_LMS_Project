@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.sites import site
 from AdminWorkFlow.models import CourseDetails
+from AdminWorkFlow.models import Userquery
 
 ## Admin work
 
@@ -10,4 +11,9 @@ class coursedetailsAdmin(admin.ModelAdmin):
                     'course_long_description', 'course_thumbnail')
     
 
+class UserqueryAdmin(admin.ModelAdmin):
+    list_display = ('username', 'email', 'Date', 'query_type', 'query')
+    
+    
 admin.site.register(CourseDetails, coursedetailsAdmin)    
+admin.site.register(Userquery, UserqueryAdmin)
