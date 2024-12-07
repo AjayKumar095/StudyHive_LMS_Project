@@ -4,7 +4,9 @@ from django.contrib.auth import  login, logout
 from django.contrib.auth.models import User
 from django.contrib import  messages
 from django.contrib.auth import login
+from django.core.exceptions import ValidationError
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.password_validation import validate_password
 from AdminWorkFlow.models import CourseDetails
 from AdminWorkFlow.models import course_purchase_by_user
 from AdminWorkFlow.models import Userquery
@@ -32,25 +34,28 @@ def usersignup(request):
             email = request.POST.get('signupemail')
             password = request.POST.get('signuppassword')
             password_conf = request.POST.get('signupConfirmpassword')
-            
-            print( username, email,  password)
-            #hash_password = make_password(password=password)
-            
+        
         # Check if passwords match
             if password == password_conf:
             # Check if username already exists
                 user = User.objects.filter(username=username).first()  # safer than using get()
                 if user:
-                    messages.error(request, 'Username already exists.')
+                    messages.warning(request, 'The username already exists. Please choose a different username, or if you already have an account, you can log in.')
                     return redirect('user')
-
-                    # Create new user if no existing user
+                
+                validate_password(password=password)
                 user = User.objects.create_user(username=username, email=email, password=password)
                 messages.success(request, 'Account created successfully!')
                 return redirect('user')  # Redirect to login page after successful signup
             else:
-                messages.error(request, 'Passwords do not match.')
-
+                messages.warning(request, 'Passwords do not match.')
+                return redirect('user')
+   
+    except ValidationError as e:
+        for error in e.messages:
+            messages.warning(request, error)
+            return redirect('user')
+        
     except Exception as e:
         return HttpResponse(f'error {e}')                
     
@@ -66,8 +71,8 @@ def userlogin(request):
                 user = User.objects.get(username=login_username)
             except User.DoesNotExist:
                 user = None
-                messages.error('Username does not exists.')
-                return redirect('usersignup')
+                messages.warning(request,'Username does not exists. Check the username or create an account.')
+                return redirect('user')
                 
             
             if user and check_password(login_password, user.password):
@@ -75,7 +80,8 @@ def userlogin(request):
                 return redirect('index')
             
             else:
-                return HttpResponse('invalid username or password')
+                messages.warning(request, 'Invaid username and passeord.')
+                return redirect('user')
     except Exception as e:
         return HttpResponse(f'Error occure. {e}')            
             
@@ -113,9 +119,9 @@ def purchase_course(request):
                 return redirect('user')
             
             course_id = int(request.POST.get('course_id'))
-            print(f'Course id = {course_id} and type of = {type(course_id)}')
+           
             course = get_object_or_404(CourseDetails, id=course_id)
-            print(f'course get = { course}')
+        
             ## check if user already purchase the course or not
             if course_purchase_by_user.objects.filter(user=request.user, course =course).exists():
                 return HttpResponse('You have already purchased this course!')

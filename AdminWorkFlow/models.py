@@ -35,7 +35,7 @@ class course_purchase_by_user(models.Model):
     purchase_date = models.DateTimeField(auto_now_add=True)  # Auto-add timestamp
 
     def __str__(self):
-        return f"{self.user.username} purchased {self.course.name}"
+        return f"{self.user.username} purchased {self.course.course_title}"
     
 
 ## model for user help or query
