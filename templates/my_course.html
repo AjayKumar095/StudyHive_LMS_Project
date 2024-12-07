@@ -175,7 +175,7 @@
                       <form action="/course_view/" method='post'>
                         {% csrf_token %}
                         <input type='hidden' name='course_name' value={{course_info.course_title}}>
-                          <div class="col-sm p-1 d-flex flex-column">
+                          <div class="col-sm d-flex flex-column">
                               <button type='submit' class="btn btn-warning">Continue</button>
                           </div>
                       </form>

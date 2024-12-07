@@ -37,7 +37,9 @@ class course_purchase_by_user(models.Model):
     def __str__(self):
         return f"{self.user.username} purchased {self.course.course_title}"
     
-
+## model to add vedios , assignment. 
+class coursecontent(models.Model):
+    course=8
 ## model for user help or query
 class Userquery(models.Model):
     
