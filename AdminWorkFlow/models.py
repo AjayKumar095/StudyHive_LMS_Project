@@ -1,8 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
-# # model to add courese detail to index page
 
+def validate_video_file(value):
+    # Define the allowed video file extensions
+    valid_extensions = ['mp4', 'avi', 'mov', 'mkv', 'flv', 'webm']
+    extension = value.name.split('.')[-1].lower()
+    if extension not in valid_extensions:
+        raise ValidationError(f"Unsupported file extension. Allowed extensions: {', '.join(valid_extensions)}")
+    
+def validate_pdf(value):
+    # Check if the file is a PDF based on the file extension
+    if not value.name.endswith('.pdf'):
+        raise ValidationError('File must be a PDF.')
+    
+# # model to add courese detail to index page     
 class CourseDetails(models.Model):
     
     course_language_choice = [
@@ -37,9 +50,27 @@ class course_purchase_by_user(models.Model):
     def __str__(self):
         return f"{self.user.username} purchased {self.course.course_title}"
     
-## model to add vedios , assignment. 
-class coursecontent(models.Model):
-    course=8
+# Video model for storing video files
+class Add_Video(models.Model):
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to='videos/', validators=[validate_video_file])
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(CourseDetails, related_name='videos', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.title} - {self.course.course_title}"
+
+
+# Assignment model for storing assignments (e.g., PDFs, Word files)
+class Add_Assignment(models.Model):
+    title = models.CharField(max_length=255)
+    file = models.FileField(upload_to='assignments/', validators=[validate_pdf])
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    course = models.ForeignKey(CourseDetails, related_name='assignments', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.title} - {self.course.course_title}"
+    
 ## model for user help or query
 class Userquery(models.Model):
     
@@ -48,4 +79,4 @@ class Userquery(models.Model):
     query_type = models.CharField(max_length=50)
     query = models.TextField()
     Date = models.DateField(auto_now_add=True)
-    
+
