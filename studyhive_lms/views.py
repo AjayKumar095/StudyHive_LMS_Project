@@ -247,18 +247,10 @@ def course_view(request):
         
         if request.method == "POST":
             course_name = request.POST.get('course_name')
-            return redirect('course_view', course_name)
+            return render(request=request, template_name="course_content_view.html",)            
         
         return redirect('mycourses')
     
     except Exception as e:
         return HttpResponse(f'Error {e}')
 
-## course content view
-def course_content_view(request, course_name):
-    try:
-        return render(request=request, template_name="course_content_view.html",
-                      context={'course_name':course_name})
-    
-    except Exception as e:
-        return HttpResponse(f'Error: {e}')    

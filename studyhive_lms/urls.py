@@ -35,8 +35,8 @@ urlpatterns = [
     path("deleteuser/", views.deleteuser, name='deleteuser'),
     path('userhelp/', views.userhelp, name='userhelp'),
     path("userquery/", views.userquery, name='userquery'),
-    path("course/", views.course_view, name='course'),
-    path("course/view/<str:course_name>/", views.course_content_view, name='course_view'),
+    path("course_view/", views.course_view, name='course_view'),
+    
     
 ]
 

@@ -172,11 +172,11 @@
                   <p class="pb-1 border-bottom">{{course.course_title}}</p>
                     
                   <div class="row ms-1 me-1">
-                      <form action="/course/" method='post'>
+                      <form action="/course_view/" method='post'>
                         {% csrf_token %}
                         <input type='hidden' name='course_name' value={{course_info.course_title}}>
-                          <div class="col-sm m-auto p-1 d-flex flex-column">
-                              <button type='submit' class="btn btn-warning">Make Payment</button>
+                          <div class="col-sm p-1 d-flex flex-column">
+                              <button type='submit' class="btn btn-warning">Continue</button>
                           </div>
                       </form>
                    </div>
