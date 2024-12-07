@@ -34,7 +34,12 @@ def usersignup(request):
             email = request.POST.get('signupemail')
             password = request.POST.get('signuppassword')
             password_conf = request.POST.get('signupConfirmpassword')
-        
+            
+            ## check for username lenght 
+            if len(username) > 15 :
+                messages.warning( request,'Username length is too long. Max lenght 15 characters.')
+                return redirect('user')
+            
         # Check if passwords match
             if password == password_conf:
             # Check if username already exists
@@ -231,4 +236,29 @@ def userquery(request):
     
     except Exception as e:
         return HttpResponse(f'Error {e}')
+
+## course view
+def course_view(request):
+    try:
+        
+        if not request.user.is_authenticated:
+            messages.warning(request=request, message='Login to your account to access the course content.')
+            return redirect('user')
+        
+        if request.method == "POST":
+            course_name = request.POST.get('course_name')
+            return redirect('course_view', course_name)
+        
+        return redirect('mycourses')
     
+    except Exception as e:
+        return HttpResponse(f'Error {e}')
+
+## course content view
+def course_content_view(request, course_name):
+    try:
+        return render(request=request, template_name="course_content_view.html",
+                      context={'course_name':course_name})
+    
+    except Exception as e:
+        return HttpResponse(f'Error: {e}')    

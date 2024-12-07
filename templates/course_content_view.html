@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.118.2">
+    <!-- Custom styles for this template -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <title>StudyHive - course content</title>
+      <!-- Custom styles for this template -->
+      {% load static %}
+      <link rel="icon" type="image/x-icon" href="{% static 'Assets\mortarboard_fill.svg' %}">
+      <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\custom_scroller.css' %}">
+      <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\features.css' %}">
+      <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\offcanvas_navbar.css' %}">
+      <link type='text/css' rel="stylesheet" href="{% static 'StyleSheets\dashboard.css' %}">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      #coursePieChart, #locationPieChart {
+        width: 300px !important;
+        height: 300px !important;
+    }
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+   
+  </head>
+<body>
+    
+<svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="support" viewBox="0 0 16 16">
+    <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
+  </symbol>
+  <symbol id="arrow_graph" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+  </symbol>
+  <symbol id="chevron-right" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+  </symbol>
+  <symbol id="door-closed" viewBox="0 0 16 16">
+    <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+    <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+  </symbol>
+  <symbol id="users" viewBox="0 0 16 16">
+    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+  </symbol>
+  <symbol id="file-earmark-text" viewBox="0 0 16 16">
+    <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5z"/>
+    <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+  </symbol>
+  <symbol id="left_arrow" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5"/>
+  </symbol>
+  <symbol id="list" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+  </symbol>
+  <symbol id="people" viewBox="0 0 16 16">
+    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8Zm-7.978-1A.261.261 0 0 1 7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002a.274.274 0 0 1-.014.002H7.022ZM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816ZM4.92 10A5.493 5.493 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/>
+  </symbol>
+  <symbol id="drop" viewBox="0 0 16 16">
+    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+  </symbol>
+ 
+  <symbol id="logo" viewBox="0 0 16 16">
+    <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+    <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
+  </symbol>
+ 
+</svg>
+
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand text-warning col-md-3 col-lg-2 px-4 pb-2 m-0"><svg class="bi me-2" style="width: 2rem; height: 2rem;"><use xlink:href="#logo"/></svg>StudyHive</a>
+  <!--<h1 class="navbar-brand text-warning col-md-3 col-lg-2 me-0 px-3"><svg class="bi me-2" width="2rem" height="2rem" ><use xlink:href="#logo"/></svg>StudyHive</h1>-->
+  <ul class="navbar-nav flex-row d-md-none">
+    <li class="nav-item text-nowrap">
+      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <svg class="bi"><use xlink:href="#list"/></svg>
+      </button>
+    </li>
+  </ul>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Section Main sidebar -->
+    <div class="sidebar  col-md-3 col-lg-2 p-0 position-fixed" data-bs-theme="dark">
+      <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-warning" id="sidebarMenuLabel"><svg class="bi me-2" style="width: 2rem; height: 2rem;"><use xlink:href="#logo"/></svg>StudyHive</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
+        </div>
+
+       <div class="offcanvas-body d-md-flex flex-column  p-0 pt-lg-3 overflow-y-auto" style="height: calc(100vh - 50px);" data-bs-theme="dark">
+          
+       <!-- Container for Video collapse list -->
+            <div class="container p-0 pb-1 mt-4">
+              
+               <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLactures" aria-expanded="false">
+                 <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Lactures <svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
+               </button>
+
+            <div class="collapse mt-2" id="collapseLactures">
+              <ul class="nav flex-column border-0 ms-4">
+  
+                 <li class="nav-item">
+                  <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
+                     class 1
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class2', this)">
+                     class 2
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class3', this)">
+                     class 3
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class4', this)">
+                     class 4
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class=" nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class5', this)">
+                     class 5
+                  </a>
+                </li>
+            </ul> 
+          </div>
+        </div>
+         
+       
+        <!-- Container for Assignment collapse list -->
+             <div class="container p-0 pb-1 mt-2">
+               <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAssignment" aria-expanded="false">
+                <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Assignments<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
+               </button>
+             <div class="collapse  mt-2" id="collapseAssignment">
+               <ul class="nav flex-column border-0 ms-4">
+   
+                  <li class="nav-item">
+                   <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
+                      class 1
+                   </a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class2', this)">
+                      class 2
+                   </a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class3', this)">
+                      class 3
+                   </a>
+                 </li>
+                 <li class="nav-item">
+                   <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class4', this)">
+                      class 4
+                   </a>
+                 </li>
+                 <li class="nav-item">
+                   <a class=" nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class5', this)">
+                      class 5
+                   </a>
+                 </li>
+             </ul> 
+           </div>
+             </div>
+
+                <!-- Container for collapseQuizzes collapse list -->
+        <div class="container p-0 pb-1 mt-2">
+                  <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuizzes" aria-expanded="false">
+                   <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Quizzes<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
+                  </button>
+                <div class="collapse  mt-2" id="collapseQuizzes">
+                  <ul class="nav flex-column border-0 ms-4">
+      
+                     <li class="nav-item">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
+                         class 1
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class2', this)">
+                         class 2
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class3', this)">
+                         class 3
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class4', this)">
+                         class 4
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class=" nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class5', this)">
+                         class 5
+                      </a>
+                    </li>
+                </ul> 
+              </div>
+          </div>
+   
+        </div>
+      </div>
+    </div>
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
+<div class="container-fluid mb-3 mt-1" >
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <a class="h2 link-dark mt-0 p-0" href="index.html" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
+  </div>
+
+ <div id="class1" class="tab-content tab_content_main_sidebar" style="display: none;">class1</div>
+ <div id="class2" class="tab-content tab_content_main_sidebar" style="display: none;">class2</div>
+ <div id="class3" class="tab-content tab_content_main_sidebar" style="display: none;">class3</div>
+ <div id="class4" class="tab-content tab_content_main_sidebar" style="display: none;">class4</div>
+ <div id="class5" class="tab-content tab_content_main_sidebar" style="display: none;">class5</div>
+
+
+</div>
+</main>
+</div>
+</div>
+
+
+<script>
+    function openTab(tabName, element) {
+        // Hide all tab content
+        var tabContents = document.getElementsByClassName("tab_content_main_sidebar");
+        for (var i = 0; i < tabContents.length; i++) {
+          tabContents[i].style.display = "none";
+        }
+      
+        // Remove 'active' class from all tabs
+        var tabs = document.getElementsByClassName("nav_link_main_sidebar");
+        for (var i = 0; i < tabs.length; i++) {
+          tabs[i].classList.remove("active");
+          tabs[i].classList.remove("bg-light");
+        }
+      
+        // Show the selected tab content and mark its tab as active
+        document.getElementById(tabName).style.display = "block";
+        element.classList.add("active");
+        element.classList.add('bg-light');
+        element.classList.add('rounded-start-pill');
+      }
+      
+</script>
+{% load static %}
+<script src="{% static 'Scripts\offcanvas-navbar.js' %}"></script>
+<script src="{% static 'Scripts\dashboard_admin.js' %}"></script>
+</body>
+</html>
+ 
