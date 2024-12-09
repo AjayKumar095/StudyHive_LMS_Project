@@ -167,14 +167,14 @@
           {% for course in purchased_courses %}
             <div class="col">
               <div class="card p-2">
-                <img src="{{course.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="{{data.course_title}}" loading="lazy">
+                <img src="{{course.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="{{course.course_title}}" loading="lazy">
                 <div class="card-body">
                   <p class="pb-1 border-bottom">{{course.course_title}}</p>
                     
                   <div class="row ms-1 me-1">
                       <form action="/course_view/" method='post'>
                         {% csrf_token %}
-                        <input type='hidden' name='course_name' value={{course_info.course_title}}>
+                        <input type='hidden' name='course_id' value={{course.id}}>
                           <div class="col-sm d-flex flex-column">
                               <button type='submit' class="btn btn-warning">Continue</button>
                           </div>

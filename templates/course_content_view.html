@@ -162,7 +162,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Section Main sidebar -->
-    <div class="sidebar  col-md-3 col-lg-2 p-0 position-fixed" data-bs-theme="dark">
+    <div class="sidebar  col-md-3 col-lg-2 p-0 position-fixed" data-bs-theme="dark"  style="z-index: 1;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title text-warning" id="sidebarMenuLabel"><svg class="bi me-2" style="width: 2rem; height: 2rem;"><use xlink:href="#logo"/></svg>StudyHive</h5>
@@ -295,7 +295,9 @@
         <a class="h2 link-dark mt-0 p-0" href="{% url "index" %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
       </div>
 
-        <div id="class1" class="tab-content tab_content_main_sidebar" style="display: none;">class1</div>
+        <div id="class1" class="tab-content tab_content_main_sidebar" style="display: none; max-width:1200px; max-height:500px;">
+          <iframe  style="z-index: 0; " src="invideo-ai-720 Welcome to the Python Foundation Course! 2024-12-07.mp4" allowfullscreen></iframe>
+        </div>
         <div id="class2" class="tab-content tab_content_main_sidebar" style="display: none;">class2</div>
         <div id="class3" class="tab-content tab_content_main_sidebar" style="display: none;">class3</div>
         <div id="class4" class="tab-content tab_content_main_sidebar" style="display: none;">class4</div>

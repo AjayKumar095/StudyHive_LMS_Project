@@ -10,6 +10,8 @@ from django.contrib.auth.password_validation import validate_password
 from AdminWorkFlow.models import CourseDetails
 from AdminWorkFlow.models import course_purchase_by_user
 from AdminWorkFlow.models import Userquery
+from AdminWorkFlow.models import Add_Assignment
+from AdminWorkFlow.models import Add_Video
 
 
 ## index page
@@ -246,7 +248,10 @@ def course_view(request):
             return redirect('user')
         
         if request.method == "POST":
-            course_name = request.POST.get('course_name')
+            course_id = request.POST.get('course_id')
+            print(f'We got the course id = {course_id}.')
+            vedio_content = Add_Video.objects.filter(course_id=course_id)
+            print(f'Vedio content:  {vedio_content}')
             return render(request=request, template_name="course_content_view.html",)            
         
         return redirect('mycourses')
