@@ -180,7 +180,16 @@
 
             <div class="collapse mt-2" id="collapseLactures">
               <ul class="nav flex-column border-0 ms-4">
-  
+                
+                 {% if Videos %}
+                   {% for video in Videos %}
+                      <li class="nav-item">
+                       <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
+                          {{video.title}}
+                       </a>
+                     </li>
+                   {% endfor %}
+                 {% endif %}
                  <li class="nav-item">
                   <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
                      class 1
@@ -218,7 +227,16 @@
                </button>
              <div class="collapse  mt-2" id="collapseAssignment">
                <ul class="nav flex-column border-0 ms-4">
-   
+                {% if Assignments %}
+                     {% for assignment in Assignments %}
+                        <li class="nav-item">
+                         <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{assignment.title}}', this)">
+                            {{assignment.title}}
+                         </a>
+                       </li>
+                     {% endfor %}
+                {% endif %}                 
+
                   <li class="nav-item">
                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
                       class 1
@@ -248,7 +266,7 @@
            </div>
              </div>
 
-                <!-- Container for collapseQuizzes collapse list -->
+      <!-- Container for collapseQuizzes collapse list -->
         <div class="container p-0 pb-1 mt-2">
                   <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuizzes" aria-expanded="false">
                    <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Quizzes<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -286,6 +304,7 @@
           </div>
    
         </div>
+
       </div>
     </div>
 
@@ -294,15 +313,29 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <a class="h2 link-dark mt-0 p-0" href="{% url "index" %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
       </div>
-
-        <div id="class1" class="tab-content tab_content_main_sidebar" style="display: none; max-width:1200px; max-height:500px;">
-          <iframe  style="z-index: 0; " src="invideo-ai-720 Welcome to the Python Foundation Course! 2024-12-07.mp4" allowfullscreen></iframe>
-        </div>
-        <div id="class2" class="tab-content tab_content_main_sidebar" style="display: none;">class2</div>
-        <div id="class3" class="tab-content tab_content_main_sidebar" style="display: none;">class3</div>
-        <div id="class4" class="tab-content tab_content_main_sidebar" style="display: none;">class4</div>
-        <div id="class5" class="tab-content tab_content_main_sidebar" style="display: none;">class5</div>
-        <div id="random" class="tab-content tab_content_main_sidebar" style="display: none;">random</div>
+      
+      <!-- videos -->
+       {% if Videos %}
+         {% for video in Videos %}
+           <div id="{{video.title}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
+            <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
+              <source  src="{{video.file.url}}" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+           </div>
+         {% endfor %}
+       {% endif %}
+      
+       <!-- Assignments -->
+       {% if Assignments %}
+       {% for assignment in Assignments %}
+         <div id="{{assignment.title}}" class="container p-1 tab_content_main_sidebar" style="display: none; max-width:1200px;  z-index: 0;">
+            <object data="{{assignment.file.url}}"  type="application/pdf" width="100%" height="100%">
+              <p>It seems your browser does not support PDF viewing. You can download the PDF <a href="your-file.pdf">here</a>.</p>
+            </object>
+         </div>
+       {% endfor %}
+     {% endif %}
     
      </div>
  </main>

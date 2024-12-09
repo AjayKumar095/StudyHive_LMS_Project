@@ -249,10 +249,15 @@ def course_view(request):
         
         if request.method == "POST":
             course_id = request.POST.get('course_id')
-            print(f'We got the course id = {course_id}.')
-            vedio_content = Add_Video.objects.filter(course_id=course_id)
-            print(f'Vedio content:  {vedio_content}')
-            return render(request=request, template_name="course_content_view.html",)            
+            course = CourseDetails.objects.get(id=course_id)
+            videos = course.videos.all()
+            assignment = course.assignments.all()
+            
+            course_content = {
+                'Videos':videos,
+                'Assignments':assignment
+            }
+            return render(request=request, template_name="course_content_view.html",context=course_content)  #context=course_content          
         
         return redirect('mycourses')
     
