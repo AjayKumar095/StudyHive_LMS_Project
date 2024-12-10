@@ -80,3 +80,5 @@ class Userquery(models.Model):
     query = models.TextField()
     Date = models.DateField(auto_now_add=True)
 
+
+    
