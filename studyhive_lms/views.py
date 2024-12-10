@@ -10,9 +10,8 @@ from django.contrib.auth.password_validation import validate_password
 from AdminWorkFlow.models import CourseDetails
 from AdminWorkFlow.models import course_purchase_by_user
 from AdminWorkFlow.models import Userquery
-from AdminWorkFlow.models import Add_Assignment
-from AdminWorkFlow.models import Add_Video
-
+import base64
+import os
 
 ## index page
 def index(request):
@@ -252,11 +251,19 @@ def course_view(request):
             course = CourseDetails.objects.get(id=course_id)
             videos = course.videos.all()
             assignment = course.assignments.all()
-            
+          
+            assignment_list = [ ] 
+            for file_path in assignment:
+        
+                file_string=pdf_to_string(file_path.file)
+                assignment_list.append({file_path.title: file_string})
+                
             course_content = {
                 'Videos':videos,
-                'Assignments':assignment
+                'Assignments':assignment_list,
+                
             }
+            #print(assignment_list)
             return render(request=request, template_name="course_content_view.html",context=course_content)  #context=course_content          
         
         return redirect('mycourses')
@@ -264,3 +271,18 @@ def course_view(request):
     except Exception as e:
         return HttpResponse(f'Error {e}')
 
+
+## pdf to string
+def pdf_to_string(path):
+
+    try:
+        file_path = os.path.join('media', str(path))
+        with open(file=file_path, mode='rb') as pdf_file:
+                
+            pdf_content = base64.b64encode(pdf_file.read()).decode()
+                
+            return pdf_content
+          
+    except:
+        print('path not get')
+        return None     
