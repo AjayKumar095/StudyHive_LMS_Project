@@ -217,7 +217,7 @@
            </div>
              </div>
 
-      <!-- Container for collapseQuizzes collapse list -->
+      <!-- Container for collapseQuizzes collapse list 
         <div class="container p-0 pb-1 mt-2">
                   <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuizzes" aria-expanded="false">
                    <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Quizzes<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -254,7 +254,7 @@
               </div>
           </div>
    
-        </div>
+        </div> -->
 
       </div>
     </div>
@@ -319,6 +319,23 @@
                </div>
            </div>
         
+           <div class=" container p-1">
+            <div class=" row m-1 p-1 border-2 rounded-1 shadow">
+              <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
+                 {% load static %}
+                <img src="{% static "Assets\Assignment-result.png" %}" alt="" class=" img-fluid"  style="max-width: 200px;">
+              </div>
+              <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
+                    <h4>Assignment Result</h4>
+                    <p>Your result display here after we evaluate your assignment.</p>
+                      {% if result %} 
+                         <h6 class="h6"><svg class="bi me-2" width="1rem" height="1rem" style="fill: rgb(253, 97, 0);"><use xlink:href="#award_marks"/>Marks: {{result}}</svg>
+                        {% else %}
+                          Not evaluated 
+                      {% endif %} </h6>
+                </div>
+              </div>
+          </div>
         {% endfor %}
        {% endfor %}
        {% else %}
