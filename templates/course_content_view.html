@@ -184,7 +184,7 @@
                  {% if Videos %}
                    {% for video in Videos %}
                       <li class="nav-item">
-                       <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
+                       <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.id}}', this)">
                           {{video.title}}
                        </a>
                      </li>
@@ -195,7 +195,7 @@
         </div>
          
        
-        <!-- Container for Assignment collapse list -->
+        <!-- Container for Assignment collapse list 
              <div class="container p-0 pb-1 mt-2">
                <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAssignment" aria-expanded="false">
                 <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Assignments<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -215,7 +215,7 @@
                 {% endif %}                 
              </ul> 
            </div>
-             </div>
+          </div>-->
 
       <!-- Container for collapseQuizzes collapse list 
         <div class="container p-0 pb-1 mt-2">
@@ -268,7 +268,7 @@
       <!-- videos -->
        {% if Videos %}
          {% for video in Videos %}
-           <div id="{{video.title}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
+           <div id="{{video.id}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
             <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
               <source  src="{{video.file.url}}" type="video/mp4">
               Your browser does not support the video tag.
@@ -319,7 +319,7 @@
                </div>
            </div>
         
-           <div class=" container p-1">
+           <!--<div class=" container p-1">
             <div class=" row m-1 p-1 border-2 rounded-1 shadow">
               <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
                  {% load static %}
@@ -334,7 +334,8 @@
                           Not evaluated 
                       {% endif %} </h6>
                 </div>
-              </div>
+              </div>-->
+
           </div>
         {% endfor %}
        {% endfor %}
