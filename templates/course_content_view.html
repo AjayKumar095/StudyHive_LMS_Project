@@ -144,6 +144,10 @@
     <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
     <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466z"/>
   </symbol>
+  <symbol id="award_marks" viewBox="0 0 16 16">
+    <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
+    <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
+  </symbol>
  
 </svg>
 
@@ -172,7 +176,7 @@
        <div class="offcanvas-body d-md-flex flex-column  p-0 pt-lg-3 overflow-y-auto" style="height: calc(100vh - 50px);" data-bs-theme="dark">
           
        <!-- Container for Video collapse list -->
-            <div class="container p-0 pb-1 mt-4">
+          <div class="container p-0 pb-1 mt-4">
               
                <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLactures" aria-expanded="false">
                  <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Lactures <svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -184,7 +188,7 @@
                 {% if Videos %}
                 {% for video in Videos %}
                    <li class="nav-item">
-                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
+                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
                        {{video.title}}
                     </a>
                   </li>
@@ -206,7 +210,7 @@
                   {% for assignment in Assignments %}
                    {% for key, value in assignment.items %}
                     <li class="nav-item">
-                     <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}', this)">
+                     <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}', this)">
                        {{key}}
                       </a>
                     </li>
@@ -215,7 +219,7 @@
                 {% endif %}  
              </ul> 
            </div>
-             </div>
+          </div>
 
                 <!-- Container for collapseQuizzes collapse list -->
         <div class="container p-0 pb-1 mt-2">
@@ -270,23 +274,21 @@
     <!-- videos -->
     {% if Videos %}
       {% for video in Videos %}
-        <div id="{{video.title}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
+        <div id="{{video.title}}" class="container tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
          <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
            <source  src="{{video.file.url}}" type="video/mp4">
            Your browser does not support the video tag.
          </video>
         </div>
       {% endfor %}
-      {% else %}
-        <h2 class='h2'>Videos not uploaded yet.</h2>
     {% endif %}
 
   <!-- Assignments -->
     {% if Assignments %}
-          {% for assignment in Assignments %}
-             {% for key, value in assignment.items  %}
+      {% for assignment in Assignments %}
+        {% for key, value in assignment.items  %}
    
-           <div id="{{key}}" class=" container mt-3 tab_content_main_sideba" style="height: 250px; display: none;  z-index: 0;">
+          <div id="{{key}}" class=" container tab-content mt-3 tab_content_main_sidebar" style="height: 250px; display: none;  z-index: 0;">
                <div class=" row m-1 p-1 ">
                   <div class=" col-sm m-1 p-1  border-2 rounded-1 shadow ">
                        <div class="row m-1 p-1">
@@ -301,7 +303,8 @@
                           </div>
                        </div>
                   </div> 
-                  <div class=" col-sm m-1 p-1 border-2 rounded-1 shadow ">
+
+                <div class=" col-sm m-1 p-1 border-2 rounded-1 shadow ">
                       <div class="row m-1 p-1">
                           <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
                               <h3 class="h3">Answer Sheet</h3>
@@ -312,15 +315,16 @@
                               <button class="btn btn-success form-control mt-2" type="submit">submit</button>
                              </form>
                           </div>
+
                           <div class="col-sm m-1 p-1 align-content-center justify-content-center">
                            {% load static %}
                               <img src="{% static "Assets\assignment_submit.png" %}" alt="" class=" img-fluid" style="max-width: 200px; float:right;">
                           </div>
                        </div>
                   </div>
-                  </div>
-
-                  <div class=" container p-1">
+                </div>
+                
+                <div class=" container p-1">
                     <div class=" row m-1 p-1 border-2 rounded-1 shadow">
                       <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
                          {% load static %}
@@ -335,15 +339,11 @@
                                   Not evaluated 
                               {% endif %} </h6>
                         </div>
-                      </div>
-              </div>
-           
-              
-           {% endfor %}
-          {% endfor %}
-          {% else %}
-              <h2 class='h2'>Assignment not uploaded yet.</h2>
-        {% endif %}
+                    </div>
+            </div>
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
 
  <div id="class 1" class="container p-0 tab_content_main_sidebar" style="display: none;">class1</div>
  <div id="class 2" class="container tab_content_main_sidebar" style="display: none;">class2</div>
