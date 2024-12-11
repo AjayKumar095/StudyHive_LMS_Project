@@ -162,7 +162,7 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Section Main sidebar -->
-    <div class="sidebar  col-md-3 col-lg-2 p-0 position-fixed" data-bs-theme="dark"  style="z-index: 1;">
+    <div class="sidebar  col-md-3 col-lg-2 p-0 position-fixed" data-bs-theme="dark" style="z-index: 1;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title text-warning" id="sidebarMenuLabel"><svg class="bi me-2" style="width: 2rem; height: 2rem;"><use xlink:href="#logo"/></svg>StudyHive</h5>
@@ -180,22 +180,22 @@
 
             <div class="collapse mt-2" id="collapseLactures">
               <ul class="nav flex-column border-0 ms-4">
-                
-                 {% if Videos %}
-                   {% for video in Videos %}
-                      <li class="nav-item">
-                       <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.id}}', this)">
-                          {{video.title}}
-                       </a>
-                     </li>
-                   {% endfor %}
-                 {% endif %}
+                         
+                {% if Videos %}
+                {% for video in Videos %}
+                   <li class="nav-item">
+                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
+                       {{video.title}}
+                    </a>
+                  </li>
+                {% endfor %}
+              {% endif %}
             </ul> 
           </div>
         </div>
          
        
-        <!-- Container for Assignment collapse list 
+        <!-- Container for Assignment collapse list -->
              <div class="container p-0 pb-1 mt-2">
                <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAssignment" aria-expanded="false">
                 <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Assignments<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -203,21 +203,21 @@
              <div class="collapse  mt-2" id="collapseAssignment">
                <ul class="nav flex-column border-0 ms-4">
                 {% if Assignments %}
-                     {% for assignment in Assignments %}
-                        {% for key, value in assignment.items %}
-                        <li class="nav-item">
-                         <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}', this)">
-                            {{key}}
-                         </a>
-                       </li>
-                       {% endfor %}
-                     {% endfor %}
-                {% endif %}                 
+                  {% for assignment in Assignments %}
+                   {% for key, value in assignment.items %}
+                    <li class="nav-item">
+                     <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}', this)">
+                       {{key}}
+                      </a>
+                    </li>
+                    {% endfor %}
+                  {% endfor %}
+                {% endif %}  
              </ul> 
            </div>
-          </div>-->
+             </div>
 
-      <!-- Container for collapseQuizzes collapse list 
+                <!-- Container for collapseQuizzes collapse list -->
         <div class="container p-0 pb-1 mt-2">
                   <button style="width: 100%;" class="btn bg-transparent rounded-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseQuizzes" aria-expanded="false">
                    <h5 style="text-align: left;" class="lead mb-1 ms-1 text-light">Quizzes<svg class="bi ms-1 pt-2" style="width: 24px; height: 24px;"><use xlink:href="#drop"/></svg></h5>
@@ -226,125 +226,134 @@
                   <ul class="nav flex-column border-0 ms-4">
       
                      <li class="nav-item">
-                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class1', this)">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class 1', this)">
                          class 1
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class2', this)">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class 2', this)">
                          class 2
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class3', this)">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class 3', this)">
                          class 3
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class4', this)">
+                      <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class 4', this)">
                          class 4
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class=" nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('random', this)">
-                         random change.
+                      <a class=" nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="#" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('class 5', this)">
+                         class 5
                       </a>
                     </li>
                 </ul> 
               </div>
           </div>
    
-        </div> -->
+        </div>
 
       </div>
     </div>
 
- <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
-    <div class="container-fluid mb-3 mt-1" >
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <a class="h2 link-dark mt-0 p-0" href="{% url "index" %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
-      </div>
-      
-      <!-- videos -->
-       {% if Videos %}
-         {% for video in Videos %}
-           <div id="{{video.id}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
-            <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
-              <source  src="{{video.file.url}}" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-           </div>
-         {% endfor %}
-         {% else %}
-           <h2 class='h2'>Videos not uploaded yet.</h2>
-       {% endif %}
-      
-       <!-- Assignments -->
-       {% if Assignments %}
-       {% for assignment in Assignments %}
-          {% for key, value in assignment.items  %}
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 bg-light">
+<div class="container-fluid mb-3 mt-1" >
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <a class="h2 link-dark mt-0 p-0" href="index.html" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
+  </div>
 
-          <div id="{{key}}" class=" container mt-3 tab_content_main_sideba" style="height: 250px; display: none;  z-index: 0;">
-            <div class=" row m-1 p-1 ">
-               <div class=" col-sm m-1 p-1  border-2 rounded-1 shadow ">
-                    <div class="row m-1 p-1">
-                       <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
-                           <h3 class="h3">Question Paper</h3>
-                           <p class=" lead">To submit your answer please view your question paper here</p>
-                          <a class="btn btn-primary form-control" href="javascript:void(0);" onclick="openPDFInNewTab('{{ value }}')">Veiw</a>
+
+   
+    <!-- videos -->
+    {% if Videos %}
+      {% for video in Videos %}
+        <div id="{{video.title}}" class="tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
+         <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
+           <source  src="{{video.file.url}}" type="video/mp4">
+           Your browser does not support the video tag.
+         </video>
+        </div>
+      {% endfor %}
+      {% else %}
+        <h2 class='h2'>Videos not uploaded yet.</h2>
+    {% endif %}
+
+  <!-- Assignments -->
+    {% if Assignments %}
+          {% for assignment in Assignments %}
+             {% for key, value in assignment.items  %}
+   
+           <div id="{{key}}" class=" container mt-3 tab_content_main_sideba" style="height: 250px; display: none;  z-index: 0;">
+               <div class=" row m-1 p-1 ">
+                  <div class=" col-sm m-1 p-1  border-2 rounded-1 shadow ">
+                       <div class="row m-1 p-1">
+                          <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
+                              <h3 class="h3">Question Paper</h3>
+                              <p class=" lead">To submit your answer please view your question paper here</p>
+                             <a class="btn btn-primary form-control" href="javascript:void(0);" onclick="openPDFInNewTab('{{ value }}')">Veiw</a>
+                          </div>
+                          <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                              {% load static %}
+                              <img src="{% static "Assets\assignment_view.png" %}" alt="" class="img-fluid"  style="max-width: 200px; float:right;">
+                          </div>
                        </div>
-                       <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                  </div> 
+                  <div class=" col-sm m-1 p-1 border-2 rounded-1 shadow ">
+                      <div class="row m-1 p-1">
+                          <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
+                              <h3 class="h3">Answer Sheet</h3>
+                              <p class=" lead">File Type: Only PDF's 10 MB</p>
+                             <form action="" method='post'>
+                               {% csrf_token %}
+                              <input class=" form-control" type="file" name="pdf_file" value="{{key}}" >
+                              <button class="btn btn-success form-control mt-2" type="submit">submit</button>
+                             </form>
+                          </div>
+                          <div class="col-sm m-1 p-1 align-content-center justify-content-center">
                            {% load static %}
-                           <img src="{% static "Assets\assignment_view.png" %}" alt="" class="img-fluid"  style="max-width: 200px; float:right;">
+                              <img src="{% static "Assets\assignment_submit.png" %}" alt="" class=" img-fluid" style="max-width: 200px; float:right;">
+                          </div>
                        </div>
-                    </div>
-               </div> 
-               <div class=" col-sm m-1 p-1 border-2 rounded-1 shadow ">
-                   <div class="row m-1 p-1">
-                       <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
-                           <h3 class="h3">Answer Sheet</h3>
-                           <p class=" lead">File Type: Only PDF's 10 MB</p>
-                          <form action="" method='post'>
-                            {% csrf_token %}
-                           <input class=" form-control" type="file" name="pdf_file" value="{{key}}" >
-                           <button class="btn btn-success form-control mt-2" type="submit">submit</button>
-                          </form>
-                       </div>
-                       <div class="col-sm m-1 p-1 align-content-center justify-content-center">
-                        {% load static %}
-                           <img src="{% static "Assets\assignment_submit.png" %}" alt="" class=" img-fluid" style="max-width: 200px; float:right;">
-                       </div>
-                    </div>
-               </div>
-               </div>
-           </div>
-        
-           <!--<div class=" container p-1">
-            <div class=" row m-1 p-1 border-2 rounded-1 shadow">
-              <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
-                 {% load static %}
-                <img src="{% static "Assets\Assignment-result.png" %}" alt="" class=" img-fluid"  style="max-width: 200px;">
-              </div>
-              <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
-                    <h4>Assignment Result</h4>
-                    <p>Your result display here after we evaluate your assignment.</p>
-                      {% if result %} 
-                         <h6 class="h6"><svg class="bi me-2" width="1rem" height="1rem" style="fill: rgb(253, 97, 0);"><use xlink:href="#award_marks"/>Marks: {{result}}</svg>
-                        {% else %}
-                          Not evaluated 
-                      {% endif %} </h6>
-                </div>
-              </div>-->
+                  </div>
+                  </div>
 
-          </div>
-        {% endfor %}
-       {% endfor %}
-       {% else %}
-           <h2 class='h2'>Assignment not uploaded yet.</h2>
-     {% endif %}
-    
-     </div>
- </main>
+                  <div class=" container p-1">
+                    <div class=" row m-1 p-1 border-2 rounded-1 shadow">
+                      <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
+                         {% load static %}
+                        <img src="{% static "Assets\Assignment-result.png" %}" alt="" class=" img-fluid"  style="max-width: 200px;">
+                      </div>
+                      <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
+                            <h4>Assignment Result</h4>
+                            <p>Your result display here after we evaluate your assignment.</p>
+                              {% if result %} 
+                                 <h6 class="h6"><svg class="bi me-2" width="1rem" height="1rem" style="fill: rgb(253, 97, 0);"><use xlink:href="#award_marks"/>Marks: {{result}}</svg>
+                                {% else %}
+                                  Not evaluated 
+                              {% endif %} </h6>
+                        </div>
+                      </div>
+              </div>
+           
+              
+           {% endfor %}
+          {% endfor %}
+          {% else %}
+              <h2 class='h2'>Assignment not uploaded yet.</h2>
+        {% endif %}
+
+ <div id="class 1" class="container p-0 tab_content_main_sidebar" style="display: none;">class1</div>
+ <div id="class 2" class="container tab_content_main_sidebar" style="display: none;">class2</div>
+ <div id="class 3" class="container tab_content_main_sidebar" style="display: none;">class3</div>
+ <div id="class 4" class="container tab_content_main_sidebar" style="display: none;">class4</div>
+ <div id="class 5" class="container tab_content_main_sidebar" style="display: none;">class5</div>
+
+
+</div>
+</main>
 </div>
 </div>
 
@@ -371,38 +380,40 @@
         element.classList.add('rounded-start-pill');
       }
       
-      // function to convert base64 string to pdf 
-      function openPDFInNewTab(base64Data) {
-        // Check if base64Data exists
-        if (!base64Data) {
-            alert("No PDF data found!");
-            return;
-        }
-        
-        // Create a Blob object from the base64 data
-        const byteCharacters = atob(base64Data); // Decode base64 string
-        const byteArrays = [];
-        
-        // Create byte array from decoded string
-        for (let offset = 0; offset < byteCharacters.length; offset += 512) {
-            const slice = byteCharacters.slice(offset, offset + 512);
-            const byteNumbers = new Array(slice.length);
-            for (let i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-            byteArrays.push(new Uint8Array(byteNumbers));
-        }
-
-        // Create Blob from byte arrays
-        const blob = new Blob(byteArrays, { type: 'application/pdf' });
-        
-        // Create an Object URL for the Blob and open it in a new tab
-        const pdfUrl = URL.createObjectURL(blob);
-        window.open(pdfUrl, '_blank');
+      
+</script>
+<script>
+  // function to convert base64 string to pdf 
+  function openPDFInNewTab(base64Data) {
+    // Check if base64Data exists
+    if (!base64Data) {
+        alert("No PDF data found!");
+        return;
     }
+    
+    // Create a Blob object from the base64 data
+    const byteCharacters = atob(base64Data); // Decode base64 string
+    const byteArrays = [];
+    
+    // Create byte array from decoded string
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+        const slice = byteCharacters.slice(offset, offset + 512);
+        const byteNumbers = new Array(slice.length);
+        for (let i = 0; i < slice.length; i++) {
+            byteNumbers[i] = slice.charCodeAt(i);
+        }
+        byteArrays.push(new Uint8Array(byteNumbers));
+    }
+
+    // Create Blob from byte arrays
+    const blob = new Blob(byteArrays, { type: 'application/pdf' });
+    
+    // Create an Object URL for the Blob and open it in a new tab
+    const pdfUrl = URL.createObjectURL(blob);
+    window.open(pdfUrl, '_blank');
+}
 </script>
 <!--
-
 {% load static %}
 <script src="{% static 'Scripts\offcanvas-navbar.js' %}"></script>-->
 
