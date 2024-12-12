@@ -256,10 +256,12 @@ def course_view(request):
           
             assignment_list = [ ] 
             for file_path in assignment:
-        
-                file_string=pdf_to_string(file_path.file)
-                assignment_list.append({file_path.title: file_string})
                 
+                submit_assignment = Assignment_submit.objects.get(course_id=course_id, title=file_path.title, user_id = request.user)
+                file_string=pdf_to_string(file_path.file)
+                assignment_list.append({file_path.title: [file_string, file_path.marks, submit_assignment.obtained_marks]})
+            
+            
             course_content = {
                 'Videos':videos,
                 'Assignments':assignment_list,

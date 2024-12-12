@@ -47,10 +47,10 @@ class Add_VideoAdmin(admin.ModelAdmin):
 # Register the Assignment model
 @admin.register(Add_Assignment)
 class Add_AssignmentAdmin(admin.ModelAdmin):
-    list_display = ('title', 'course', 'uploaded_at')
+    list_display = ('title', 'course', 'uploaded_at', 'marks')
     list_filter = ('course',)
     search_fields = ('title',)
-
+    list_editable = ('marks',)
     # Add the course dropdown to the assignment upload form
     fieldsets = (
         (None, {
@@ -61,7 +61,8 @@ class Add_AssignmentAdmin(admin.ModelAdmin):
 
 @admin.register(Assignment_submit) 
 class Assignment_submit_admin(admin.ModelAdmin):
-        list_display = ('user', 'course', 'title', 'uploaded_at')
+        list_display = ('user', 'course', 'title', 'uploaded_at', 'obtained_marks')
         search_fields = ('user', 'course', 'title')
+        list_editable = ('obtained_marks', )
         
         

@@ -68,7 +68,8 @@ class Add_Assignment(models.Model):
     file = models.FileField(upload_to='assignments/', validators=[validate_pdf])
     uploaded_at = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(CourseDetails, related_name='assignments', on_delete=models.CASCADE)
-
+    marks = models.IntegerField(null=True, blank=True)  # Marks assigned for the assignment
+    
     def __str__(self):
         return f"{self.title} - {self.course.course_title}"
 
@@ -82,6 +83,7 @@ class Assignment_submit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseDetails, on_delete=models.CASCADE)
     uploaded_at = models.DateField(auto_now_add=True)
+    obtained_marks = models.IntegerField(null=True, blank=True)  # Marks obtained by the student, editable in admin
     
     class Meta:
         unique_together = ('user', 'title')  # Ensure unique constraint
