@@ -4,6 +4,7 @@ from AdminWorkFlow.models import CourseDetails
 from AdminWorkFlow.models import Userquery
 from AdminWorkFlow.models import Add_Assignment
 from AdminWorkFlow.models import Add_Video
+from AdminWorkFlow.models import Assignment_submit
 from AdminWorkFlow.models import course_purchase_by_user
 
 ## Admin work
@@ -56,9 +57,11 @@ class Add_AssignmentAdmin(admin.ModelAdmin):
             'fields': ('title', 'file', 'course'),
         }),
     )
-  
-#admin.site.register(course_purchase_by_user, course_purchase_by_userAdmin)  
-#admin.site.register(CourseDetails, coursedetailsAdmin)    
-#admin.site.register(Userquery, UserqueryAdmin)
-#admin.site.register(Add_Assignment, Add_AssignmentAdmin)
-#admin.site.register(Add_Video, Add_VideoAdmin)
+
+
+@admin.register(Assignment_submit) 
+class Assignment_submit_admin(admin.ModelAdmin):
+        list_display = ('user', 'course', 'title', 'uploaded_at')
+        search_fields = ('user', 'course', 'title')
+        
+        

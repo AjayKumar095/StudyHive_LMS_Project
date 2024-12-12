@@ -36,6 +36,7 @@ urlpatterns = [
     path('userhelp/', views.userhelp, name='userhelp'),
     path("userquery/", views.userquery, name='userquery'),
     path("course_view/", views.course_view, name='course_view'),
+    path("submit_assignment/", views.uploaded_assignment, name="submit_assignment")
     
     
 ]

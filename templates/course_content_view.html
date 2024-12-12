@@ -255,68 +255,73 @@
       {% endfor %}
     {% endif %}
 
-  <!-- Assignments -->
-    {% if Assignments %}
-      {% for assignment in Assignments %}
-        {% for key, value in assignment.items  %}
-   
-          <div id="{{key}}" class=" container tab-content mt-3 tab_content_main_sidebar" style="height: 250px; display: none;  z-index: 0;">
-              <div class=" row m-1 p-1 ">
-                  <div class=" col-sm m-1 p-1  border-2 rounded-1 shadow ">
-                       <div class="row m-1 p-1">
-                          <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
-                              <h3 class="h3">Question Paper</h3>
-                              <p class=" lead">To submit your answer please view your question paper here</p>
-                             <a class="btn btn-primary form-control" href="javascript:void(0);" onclick="openPDFInNewTab('{{ value }}')">Veiw</a>
-                          </div>
-                          <div class="col-sm m-1 p-1 align-content-center justify-content-center">
-                              {% load static %}
-                              <img src="{% static "Assets\assignment_view.png" %}" alt="" class="img-fluid"  style="max-width: 200px; float:right;">
-                          </div>
-                       </div>
-                  </div> 
-
-                <div class=" col-sm m-1 p-1 border-2 rounded-1 shadow ">
-                      <div class="row m-1 p-1">
-                          <div class="col-sm m-1 p-1 align-content-center justify-content-center ">
-                              <h3 class="h3">Answer Sheet</h3>
-                              <p class=" lead">File Type: Only PDF's 10 MB</p>
-                             <form action="" method='post'>
-                               {% csrf_token %}
-                              <input class=" form-control" type="file" name="pdf_file" value="{{key}}" >
-                              <button class="btn btn-success form-control mt-2" type="submit">submit</button>
-                             </form>
-                          </div>
-
-                          <div class="col-sm m-1 p-1 align-content-center justify-content-center">
-                           {% load static %}
-                              <img src="{% static "Assets\assignment_submit.png" %}" alt="" class=" img-fluid" style="max-width: 200px; float:right;">
-                          </div>
-                       </div>
-                  </div>
-
-                </div>
-                
-                <div class=" container p-1">
-                    <div class=" row m-1 p-1 border-2 rounded-1 shadow">
-                      <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
-                         {% load static %}
-                        <img src="{% static "Assets\Assignment-result.png" %}" alt="" class=" img-fluid"  style="max-width: 200px;">
-                      </div>
-                      <div class=" col-sm m-1 p-1 align-content-center justify-content-center">
-                            <h4>Assignment Result</h4>
-                            <p>Your result display here after we evaluate your assignment.</p>
-                              {% if result %} 
-                                 <h6 class="h6"><svg class="bi me-2" width="1rem" height="1rem" style="fill: rgb(253, 97, 0);"><use xlink:href="#award_marks"/>Marks: {{result}}</svg>
-                                {% else %}
-                                  Not evaluated 
-                              {% endif %} </h6>
-                        </div>
-                    </div>
+<!-- Assignments -->
+{% if Assignments %}
+  {% for assignment in Assignments %}
+    {% for key, value in assignment.items %}
+      <div id="{{key}}" class="container tab-content mt-3 tab_content_main_sidebar" style="height: 250px; display: none; z-index: 0;">
+        
+        <!-- First Section -->
+        <div class="row m-1 p-1">
+          <div class="col-sm m-1 p-1 border-2 rounded-1 shadow">
+            <div class="row m-1 p-1">
+              <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                <h3 class="h3">Question Paper</h3>
+                <p class="lead">To submit your answer, please view your question paper here</p>
+                <a class="btn btn-primary form-control" href="javascript:void(0);" onclick="openPDFInNewTab('{{ value }}')">View</a>
+              </div>
+              <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                {% load static %}
+                <img src="{% static 'Assets/assignment_view.png' %}" alt="" class="img-fluid" style="max-width: 200px; float:right;">
+              </div>
             </div>
-        {% endfor %}
-      {% endfor %}
-    {% endif %}
+          </div>
+
+          <!-- Second Section -->
+          <div class="col-sm m-1 p-1 border-2 rounded-1 shadow">
+            <div class="row m-1 p-1">
+              <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                <h3 class="h3">Answer Sheet</h3>
+                <p class="lead">File Type: Only PDFs up to 10 MB</p>
+                <form action="/submit_assignment/" method="post" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <input class="form-control" type="file" name="pdf_file" required>
+                  <input type="hidden" name="pdf_title" value="{{key}}">
+                  <button class="btn btn-success mt-2" type="submit">Submit</button>
+                </form>
+              </div>
+              <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+                {% load static %}
+                <img src="{% static 'Assets/assignment_submit.png' %}" alt="" class="img-fluid" style="max-width: 200px; float:right;">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Section -->
+        <div class="container p-1">
+          <div class="row m-1 p-1 border-2 rounded-1 shadow">
+            <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+              {% load static %}
+              <img src="{% static 'Assets/Assignment-result.png' %}" alt="" class="img-fluid" style="max-width: 200px;">
+            </div>
+            <div class="col-sm m-1 p-1 align-content-center justify-content-center">
+              <h4>Assignment Result</h4>
+              <p>Your result will display here after we evaluate your assignment.</p>
+              {% if result %}
+                <h6 class="h6"><svg class="bi me-2" width="1rem" height="1rem" style="fill: rgb(253, 97, 0);"><use xlink:href="#award_marks" /> Marks: {{result}}</svg>
+              {% else %}
+                Not evaluated
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+
 
 </div>
 </main>

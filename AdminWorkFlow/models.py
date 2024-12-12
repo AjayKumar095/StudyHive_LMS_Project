@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
@@ -70,7 +71,29 @@ class Add_Assignment(models.Model):
 
     def __str__(self):
         return f"{self.title} - {self.course.course_title}"
+
+
+
+## Assignment submit by user model
+class Assignment_submit(models.Model):
     
+    title = models.CharField(max_length=50)
+    pdf_file = models.FileField(upload_to='User_submition/', validators=[validate_pdf])
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(CourseDetails, on_delete=models.CASCADE)
+    uploaded_at = models.DateField(auto_now_add=True)
+    
+    class Meta:
+        unique_together = ('user', 'title')  # Ensure unique constraint
+
+    def delete_old_file(self):
+        # Delete the old file from the storage
+        if self.pdf_file and os.path.isfile(self.pdf_file.path):
+            os.remove(self.pdf_file.path)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.title}"
+
 ## model for user help or query
 class Userquery(models.Model):
     

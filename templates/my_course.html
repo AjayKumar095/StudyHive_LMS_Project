@@ -161,6 +161,15 @@
 <div class="container-fluid p-3" style="min-height: calc(100vh - 170px);">
     <div class="container">
         <h4 class="pb-2">My Courses</h4>
+        {% if messages  %}
+        <div class=" container-fluid">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+      {% endif %}
         <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 row-cols-md-3 g-3 mt-2  p-2">
 
         {% if purchased_courses %}

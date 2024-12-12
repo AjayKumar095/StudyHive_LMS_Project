@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import  login, logout
 from django.contrib.auth.models import User
@@ -10,6 +10,8 @@ from django.contrib.auth.password_validation import validate_password
 from AdminWorkFlow.models import CourseDetails
 from AdminWorkFlow.models import course_purchase_by_user
 from AdminWorkFlow.models import Userquery
+from AdminWorkFlow.models import Assignment_submit
+from AdminWorkFlow.models import Add_Assignment
 import base64
 import os
 
@@ -271,7 +273,54 @@ def course_view(request):
     except Exception as e:
         return HttpResponse(f'Error {e}')
 
+## Assignment submit module
+def uploaded_assignment(request):
+    
+    try:
+        if request.method == "POST":
+            # Get the uploaded file and title from the form
+            pdf_file = request.FILES.get('pdf_file')
+            assignment_title = request.POST.get('pdf_title')
+            
+            print(f'assignment title:  {assignment_title}, pdf file = {pdf_file}')
+            
+            # Validate that both file and title are provided
+            if not pdf_file or not assignment_title:
+                return JsonResponse({'status': 'error', 'message': 'Assignment title and file are required.'})
 
+            try:
+                # Fetch the related assignment and course details
+                assignment = Add_Assignment.objects.filter(title=assignment_title).first()
+                if not assignment:
+                    return JsonResponse({'status': 'error', 'message': 'Assignment not found.'})
+
+                course = assignment.course  # Retrieve the related course from the assignment
+                user = request.user  # Get the currently logged-in user
+            except CourseDetails.DoesNotExist:
+                return JsonResponse({'status': 'error', 'message': 'Course not found for the provided title.'})
+
+            # Check if an existing assignment for the user and course already exists
+            existing_assignment = Assignment_submit.objects.filter(user=user, course=course).first()
+
+            if existing_assignment:
+                # Delete the old file and update the record
+                existing_assignment.pdf_file.delete()  # Remove the old file from storage
+                existing_assignment.pdf_file = pdf_file
+                existing_assignment.save()
+            else:
+                # Create a new assignment record
+                Assignment_submit.objects.create(
+                    title=assignment_title,
+                    pdf_file=pdf_file,
+                    user=user,
+                    course=course,
+                )
+
+            messages.success(request, 'Your assignment has been submitted successfully.')
+            return redirect('course_view')  # Redirect to the course view or any relevant page
+
+    except Exception as e:
+        return HttpResponse(f'Error: {e}')
 ## pdf to string
 def pdf_to_string(path):
 
