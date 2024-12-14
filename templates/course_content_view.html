@@ -107,6 +107,15 @@
 <body>
     
 <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+  <symbol id="video-youtube" viewBox="0 0 16 16">
+    <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"/>
+  </symbol>
+  <symbol id="file-content" viewBox="0 0 16 16">
+    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M3 9h10v1H6v2h7v1H6v2H5v-2H3v-1h2v-2H3z"/>
+  </symbol>
+  <symbol id="assignment-content" viewBox="0 0 16 16">
+    <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2M6.646 5.646a.5.5 0 1 1 .708.708L5.707 8l1.647 1.646a.5.5 0 0 1-.708.708l-2-2a.5.5 0 0 1 0-.708zm2.708 0 2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 1 1 .708-.708"/>
+  </symbol>
   <symbol id="support" viewBox="0 0 16 16">
     <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5"/>
   </symbol>
@@ -238,26 +247,26 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
 <div class="container-fluid mb-3 mt-1" >
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <a class="h2 link-dark mt-0 p-0" href="{% url 'index' %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>{{ course.title }}</a>
+    <a class="h2 link-dark mt-0 p-0" href="{% url 'index' %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>{{ course.course_title }}</a>
   </div>
     
     <div id="temporary_div" class="container text-center p-4 my-4 bg-light rounded shadow">
-         <img src="https://via.placeholder.com/150" alt="Learning Illustration" class="rounded-circle mb-4" style="max-width: 150px;">
+         <img src="{% static 'Assets\educational-icon.png' %}" alt="Learning Illustration" class="mb-4 img-fluid" style="max-width: 150px;">
          <h2 class="text-primary fw-bold mb-3">Ready to Learn Something New?</h2>
          <p class="text-secondary fs-5 mb-4">
              Welcome to your personalized learning space. Dive into our curated content designed to inspire and guide you through every step of your journey!
          </p>
          <div class="row justify-content-center g-3">
              <div class="col-sm text-center">
-                 <img src="https://via.placeholder.com/80" alt="Videos" class="rounded img-fluid">
+              <svg class="bi m-2" style="width: 3rem; height: 3rem; fill: rgb(247, 39, 39);"><use xlink:href="#video-youtube"/></svg>
                  <p class="text-dark mt-2">Interactive Videos</p>
              </div>
              <div class="col-sm text-center">
-                 <img src="https://via.placeholder.com/80" alt="Materials" class="rounded img-fluid">
+              <svg class="bi m-2" style="width: 3rem; height: 3rem; fill: rgb(32, 243, 0);"><use xlink:href="#file-content"/></svg>
                  <p class="text-dark mt-2">In-depth Materials</p>
              </div>
              <div class="col-sm text-center">
-                 <img src="https://via.placeholder.com/80" alt="Assignments" class="rounded img-fluid">
+              <svg class="bi m-2" style="width: 3rem; height: 3rem; fill: rgb(98, 110, 245);"><use xlink:href="#assignment-content"/></svg>
                  <p class="text-dark mt-2">Challenging Assignments</p>
              </div>
          </div>
