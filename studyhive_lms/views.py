@@ -253,7 +253,7 @@ def course_view(request):
             course = CourseDetails.objects.get(id=course_id)
             videos = course.videos.all()
             assignment = course.assignments.all()
-          
+            
             assignment_list = [ ] 
             for file_path in assignment:
                 
@@ -265,15 +265,37 @@ def course_view(request):
             course_content = {
                 'Videos':videos,
                 'Assignments':assignment_list,
+                'course':course
                 
             }
             #print(assignment_list)
             return render(request=request, template_name="course_content_view.html",context=course_content)  #context=course_content          
-        
-        return redirect('mycourses')
+        else:
+            course_id = request.session.get('course_id', None)
+            print(f'course_id in course view function: {course_id}, and type of this id {type(course_id)}')
+            course = CourseDetails.objects.get(id=course_id)
+            videos = course.videos.all()
+            assignment = course.assignments.all()
+            
+            assignment_list = [ ] 
+            for file_path in assignment:
+                
+                submit_assignment = Assignment_submit.objects.get(course_id=course_id, title=file_path.title, user_id = request.user)
+                file_string=pdf_to_string(file_path.file)
+                assignment_list.append({file_path.title: [file_string, file_path.marks, submit_assignment.obtained_marks]})
+            
+            
+            course_content = {
+                'Videos':videos,
+                'Assignments':assignment_list,
+                'course':course
+                
+            }
+            return render(request=request, template_name="course_content_view.html",context=course_content)            
     
     except Exception as e:
-        return HttpResponse(f'Error {e}')
+        messages.error(request=request, message=e)
+        return redirect('mycourses')
 
 ## Assignment submit module
 def uploaded_assignment(request):
@@ -283,6 +305,8 @@ def uploaded_assignment(request):
             # Get the uploaded file and title from the form
             pdf_file = request.FILES.get('pdf_file')
             assignment_title = request.POST.get('pdf_title')
+            course_id = request.POST.get('course_id')
+            print(f'course_id in assignment function: {course_id}, and type of this id {type(course_id)}')
             
             print(f'assignment title:  {assignment_title}, pdf file = {pdf_file}')
             
@@ -318,7 +342,8 @@ def uploaded_assignment(request):
                     course=course,
                 )
 
-            messages.success(request, 'Your assignment has been submitted successfully.')
+            
+            request.session['course_id'] = int(course_id)
             return redirect('course_view')  # Redirect to the course view or any relevant page
 
     except Exception as e:

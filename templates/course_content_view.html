@@ -238,10 +238,31 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 ">
 <div class="container-fluid mb-3 mt-1" >
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <a class="h2 link-dark mt-0 p-0" href="{% url 'index' %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>Course name</a>
+    <a class="h2 link-dark mt-0 p-0" href="{% url 'index' %}" style="text-decoration: none;"><svg class="bi me-1" style="width: 2rem; height: 2rem;"><use xlink:href="#left_arrow"/></svg>{{ course.title }}</a>
   </div>
-
-
+    
+    <div id="temporary_div" class="container text-center p-4 my-4 bg-light rounded shadow">
+         <img src="https://via.placeholder.com/150" alt="Learning Illustration" class="rounded-circle mb-4" style="max-width: 150px;">
+         <h2 class="text-primary fw-bold mb-3">Ready to Learn Something New?</h2>
+         <p class="text-secondary fs-5 mb-4">
+             Welcome to your personalized learning space. Dive into our curated content designed to inspire and guide you through every step of your journey!
+         </p>
+         <div class="row justify-content-center g-3">
+             <div class="col-sm text-center">
+                 <img src="https://via.placeholder.com/80" alt="Videos" class="rounded img-fluid">
+                 <p class="text-dark mt-2">Interactive Videos</p>
+             </div>
+             <div class="col-sm text-center">
+                 <img src="https://via.placeholder.com/80" alt="Materials" class="rounded img-fluid">
+                 <p class="text-dark mt-2">In-depth Materials</p>
+             </div>
+             <div class="col-sm text-center">
+                 <img src="https://via.placeholder.com/80" alt="Assignments" class="rounded img-fluid">
+                 <p class="text-dark mt-2">Challenging Assignments</p>
+             </div>
+         </div>
+         <p class="mt-4 text-muted small">🌟 Tip: Start with a section you find most exciting!</p>
+     </div>
    
     <!-- videos -->
     {% if Videos %}
@@ -288,6 +309,7 @@
                   {% csrf_token %}
                   <input class="form-control" type="file" name="pdf_file" required>
                   <input type="hidden" name="pdf_title" value="{{key}}">
+                  <input type="hidden" name="course_id" value="{{course.id}}">
                   <button class="btn btn-success form-control mt-2" type="submit">Submit</button>
                 </form>
               </div>
@@ -338,6 +360,13 @@
         // Hide all tab content
         var tabContents = document.getElementsByClassName("tab_content_main_sidebar");
         for (var i = 0; i < tabContents.length; i++) {
+          // Pause any videos within the tab content
+          var videos = tabContents[i].getElementsByTagName("video");
+          for (var j = 0; j < videos.length; j++) {
+             videos[j].pause();
+            videos[j].currentTime = 0; // Reset the video to the start
+          } 
+
           tabContents[i].style.display = "none";
         }
       
@@ -347,6 +376,13 @@
           tabs[i].classList.remove("active");
           tabs[i].classList.remove("bg-light");
         }
+
+        // Hide the temporary div when a tab is clicked
+        var tempDiv = document.getElementById("temporary_div");
+        if (tempDiv) {
+            tempDiv.style.display = "none";
+        
+          }
       
         // Show the selected tab content and mark its tab as active
         document.getElementById(tabName).style.display = "block";
