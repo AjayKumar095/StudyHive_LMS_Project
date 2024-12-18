@@ -201,7 +201,8 @@
             <label for="floatingPasswordlogin">Password</label>
           </div>
           <div class="checkbox mb-3">
-                <p class="text-end"><a href="#" id="password_reset">Forgot password ?</a></p>
+            
+              <p class="text-end"><a href="#" id="password_reset">Forgot password ?</a></p>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
           <hr class="my-4">
@@ -235,18 +236,15 @@
             </form>
 
             <!--Forgot passward form-->
-            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="forgotPasswordForm">
+            <form action="/password_reset/" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="forgotPasswordForm">
                 <h4 class="mb-2 text-warning">Forgot Password</h4>
                 
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control"  placeholder="Username"  name="Username">
-                    <label for="floatingInputfogot">Username</label>
+                  <div class="form-floating mb-3">        
+                      {% csrf_token %}
+                      {{ form.as_p }}
                   </div>
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control"  placeholder="Email" required>
-                    <label for="floatingEmailfogot">Email</label>
-                  </div>
-                  <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                 
+                  <button class="w-100 btn btn-lg btn-primary" type="submit">Forgot password ?</button>
                    <hr class="my-4">
                   <small class="text-body-secondary text-end"><a href="" id="showLoginFromForgot">Goto Login Page</a></small>
                 </form>

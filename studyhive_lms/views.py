@@ -348,6 +348,9 @@ def uploaded_assignment(request):
 
     except Exception as e:
         return HttpResponse(f'Error: {e}')
+
+
+
 ## pdf to string
 def pdf_to_string(path):
 

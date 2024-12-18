@@ -20,6 +20,7 @@ from django.urls import path
 from studyhive_lms import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import  views as auth_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -36,8 +37,14 @@ urlpatterns = [
     path('userhelp/', views.userhelp, name='userhelp'),
     path("userquery/", views.userquery, name='userquery'),
     path("course_view/", views.course_view, name='course_view'),
-    path("submit_assignment/", views.uploaded_assignment, name="submit_assignment")
+    path("submit_assignment/", views.uploaded_assignment, name="submit_assignment"),
     
+    # Forgot Password URLs
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset_done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm',
+         success_url='/user/'),
+    path('reset_done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     
 ]
 
