@@ -22,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-i++qd4=ff3h6s$gzju4$d5&1%o7dd^zj+mn&jm)!jng%!198lz"
+default_secret_key = "django-insecure-i++qd4=ff3h6s$gzju4$d5&1%o7dd^zj+mn&jm)!jng%!198lz"
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', default_secret_key)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["StudyHive.onrender.com"]
 
 
 # Application definition
