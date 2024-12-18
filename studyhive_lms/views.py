@@ -18,7 +18,7 @@ import os
 ## index page
 def index(request):
     coursedetails = CourseDetails.objects.all()
-    return render(request=request, template_name="index.html",  context={"coursedetails": coursedetails})
+    return render(request=request, template_name="Index.html",  context={"coursedetails": coursedetails})
 
 ## user login page
 def user(request):
