@@ -1,1 +1,1 @@
-web: gunicorn studyhive_lsm.wsgi
+web: gunicorn studyhive_lms.wsgi
