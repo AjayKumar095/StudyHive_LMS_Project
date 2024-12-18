@@ -88,7 +88,7 @@ def userlogin(request):
                 return redirect('index')
             
             else:
-                messages.warning(request, 'Invaid username and passeord.')
+                messages.warning(request, 'Invaid username and password.')
                 return redirect('user')
     except Exception as e:
         return HttpResponse(f'Error occure. {e}')            
