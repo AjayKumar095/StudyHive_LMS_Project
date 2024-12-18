@@ -161,8 +161,7 @@
           <ul class="dropdown-menu dropdown-menu-dark">
             {% if coursedetails %}
                {% for course in coursedetails %}
-                <li><a class="dropdown-item" href="#">{{course.course_title}}</a></li>
-            
+                <li><a class="dropdown-item" href="#courses">{{course.course_title}}</a></li>
                {% endfor %}
             {% endif %}
           </ul>
@@ -261,7 +260,7 @@
 
        {% if  coursedetails %}
        {% for data in  coursedetails %}
-        <div class="col">
+        <div class="col" id="{{data.course_title}}">
           <div class="card shadow-sm">
             <img src="{{data.course_thumbnail.url}}" class="d-block mx-lg-auto img-fluid" alt="{{data.course_title}}" loading="lazy">
           
