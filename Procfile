@@ -1,1 +1,0 @@
-web: gunicorn studyhive_lms.wsgi
