@@ -240,7 +240,6 @@ def userquery(request):
     except Exception as e:
         return HttpResponse(f'Error {e}')
 
-## course view
 def course_view(request):
     try:
         
@@ -254,22 +253,29 @@ def course_view(request):
             videos = course.videos.all()
             assignment = course.assignments.all()
             
-            assignment_list = [ ] 
+            assignment_list = [] 
             for file_path in assignment:
+                # Fetch assignments added by the admin (from Add_Assignment)
+                admin_assignment = Add_Assignment.objects.filter(course_id=course_id, title=file_path.title).first()
                 
-                submit_assignment = Assignment_submit.objects.get(course_id=course_id, title=file_path.title, user_id = request.user)
-                file_string=pdf_to_string(file_path.file)
-                assignment_list.append({file_path.title: [file_string, file_path.marks, submit_assignment.obtained_marks]})
-            
+                # Check if the user has already submitted the assignment (from Assignment_submit)
+                user_submission = Assignment_submit.objects.filter(course_id=course_id, title=file_path.title, user=request.user).first()
+                
+                file_string = pdf_to_string(file_path.file)
+                obtained_marks = user_submission.obtained_marks if user_submission else None
+                
+                assignment_list.append({
+                    file_path.title: [file_string, file_path.marks, obtained_marks]
+                })
             
             course_content = {
-                'Videos':videos,
-                'Assignments':assignment_list,
-                'course':course
-                
+                'Videos': videos,
+                'Assignments': assignment_list,
+                'course': course
             }
-            #print(assignment_list)
-            return render(request=request, template_name="course_content_view.html",context=course_content)  #context=course_content          
+            
+            return render(request=request, template_name="course_content_view.html", context=course_content)
+        
         else:
             course_id = request.session.get('course_id', None)
             print(f'course_id in course view function: {course_id}, and type of this id {type(course_id)}')
@@ -277,25 +283,33 @@ def course_view(request):
             videos = course.videos.all()
             assignment = course.assignments.all()
             
-            assignment_list = [ ] 
+            assignment_list = [] 
             for file_path in assignment:
+                # Fetch assignments added by the admin (from Add_Assignment)
+                admin_assignment = Add_Assignment.objects.filter(course_id=course_id, title=file_path.title).first()
                 
-                submit_assignment = Assignment_submit.objects.get(course_id=course_id, title=file_path.title, user_id = request.user)
-                file_string=pdf_to_string(file_path.file)
-                assignment_list.append({file_path.title: [file_string, file_path.marks, submit_assignment.obtained_marks]})
-            
+                # Check if the user has already submitted the assignment (from Assignment_submit)
+                user_submission = Assignment_submit.objects.filter(course_id=course_id, title=file_path.title, user=request.user).first()
+                
+                file_string = pdf_to_string(file_path.file)
+                obtained_marks = user_submission.obtained_marks if user_submission else None
+                
+                assignment_list.append({
+                    file_path.title: [file_string, file_path.marks, obtained_marks]
+                })
             
             course_content = {
-                'Videos':videos,
-                'Assignments':assignment_list,
-                'course':course
-                
+                'Videos': videos,
+                'Assignments': assignment_list,
+                'course': course
             }
-            return render(request=request, template_name="course_content_view.html",context=course_content)            
+            
+            return render(request=request, template_name="course_content_view.html", context=course_content)            
     
     except Exception as e:
         messages.error(request=request, message=f"Not enter in course_view {e}")
         return redirect('mycourses')
+
 
 ## Assignment submit module
 def uploaded_assignment(request):
@@ -348,8 +362,6 @@ def uploaded_assignment(request):
 
     except Exception as e:
         return HttpResponse(f'Error: {e}')
-
-
 
 ## pdf to string
 def pdf_to_string(path):
