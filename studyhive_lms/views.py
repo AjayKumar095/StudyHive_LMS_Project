@@ -283,8 +283,6 @@ def course_view(request):
             
             assignment_list = [] 
             for file_path in assignment:
-                # Fetch assignments added by the admin (from Add_Assignment)
-                admin_assignment = Add_Assignment.objects.filter(course_id=course_id, title=file_path.title).first()
                 
                 # Check if the user has already submitted the assignment (from Assignment_submit)
                 user_submission = Assignment_submit.objects.filter(course_id=course_id, title=file_path.title, user=request.user).first()
