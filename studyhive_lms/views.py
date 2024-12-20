@@ -307,7 +307,6 @@ def course_view(request):
             return render(request=request, template_name="course_content_view.html", context=course_content)            
     
     except Exception as e:
-        messages.error(request=request, message=f"Not enter in course_view {e}")
         return redirect('mycourses')
 
 
