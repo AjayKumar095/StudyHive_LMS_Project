@@ -159,6 +159,15 @@
 </nav>
 
 <div class="container-fluid p-3" style="min-height: calc(100vh - 170px);">
+  {% if messages  %}
+  <div class=" container-fluid">
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+              {{ message }}
+          </div>
+      {% endfor %}
+  </div>
+{% endif %}
     <div class="container">
         <h4 class="pb-2">My Courses</h4>
     
