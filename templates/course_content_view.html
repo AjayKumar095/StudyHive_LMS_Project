@@ -197,7 +197,7 @@
                 {% if Videos %}
                 {% for video in Videos %}
                    <li class="nav-item">
-                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}', this)">
+                    <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{video.title}}-video', this)">
                        {{video.title}}
                     </a>
                   </li>
@@ -219,7 +219,7 @@
                   {% for assignment in Assignments %}
                    {% for key, value in assignment.items %}
                     <li class="nav-item">
-                     <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}', this)">
+                     <a class="nav-link nav_link_main_sidebar align-items-center gap-2" aria-current="page" href="" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu"  onclick="openTab('{{key}}-assignment-file', this)">
                        {{key}}
                       </a>
                     </li>
@@ -276,7 +276,7 @@
     <!-- videos -->
     {% if Videos %}
       {% for video in Videos %}
-        <div id="{{video.title}}" class="container tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
+        <div id="{{video.title}}-video" class="container tab-content tab_content_main_sidebar ratio ratio-16x9" style="display: none; max-width:1200px; max-height:500px;">
          <video style="z-index: 0;" controls controlslist="nodownload" disablePictureInPicture>
            <source  src="{{video.file.url}}" type="video/mp4">
            Your browser does not support the video tag.
@@ -289,7 +289,7 @@
 {% if Assignments %}
   {% for assignment in Assignments %}
     {% for key, value in assignment.items %}
-      <div id="{{key}}" class="container tab-content mt-3 tab_content_main_sidebar" style="height: 250px; display: none; z-index: 0;">
+      <div id="{{key}}-assignment-file" class="container tab-content mt-3 tab_content_main_sidebar" style="height: 250px; display: none; z-index: 0;">
         
         <!-- First Section -->
         <div class="row m-1 p-1">
