@@ -187,11 +187,11 @@
         <h1 class="display-4 fw-bold lh-1 text-body-emphasis  mb-3">Website</h1>
         <p class="col-lg-10 fs-4">Your gateway to mastering IT technology. Join us to access a wealth of knowledge and take your skills to the next level. Sign in or sign up to start learning today!</p>
       </div>
-      <div class="col-md-10 mx-auto col-lg-5">
+    <div class="col-md-10 mx-auto col-lg-5">
         <!--Login Form-->
-        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary form" id="loginForm" action="/userlogin/" method='post'>
+      <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary form" id="loginForm" action="/userlogin/" method='post'>
         <h4 class="mb-2 text-warning">Login</h4>
-          {% csrf_token %}
+           {% csrf_token %}
           <div class="form-floating mb-3">
             <input type="text" class="form-control"  placeholder="Username"  name="Username_login" required>
             <label for="floatingInputlogin">Username</label>
@@ -209,8 +209,8 @@
         </form>
         
         <!-- Sign up form -->
-        <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="signUpForm" method='POST' action="/usersignup/">
-          {% csrf_token %}
+      <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="signUpForm" method='POST' action="/usersignup/">
+           {% csrf_token %}
             <h4 class="mb-2 text-warning">Sign Up</h4>
             
               <div class="form-floating mb-1">
@@ -235,7 +235,7 @@
             </form>
 
             <!--Forgot passward form-->
-            <form action="/password_reset/" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="forgotPasswordForm">
+        <form action="/password_reset/" method="post" class="p-4 p-md-5 border rounded-3 bg-body-tertiary form hidden" id="forgotPasswordForm">
                 <h4 class="mb-2 text-warning">Forgot Password</h4>
                 
                   <div class="form-floating mb-3">        
