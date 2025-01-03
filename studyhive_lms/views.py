@@ -77,7 +77,7 @@ def userlogin(request):
            
             try :
                 user = User.objects.get(username=login_username)
-            except User.DoesNotExist:
+            except User.DoesNotExist:   
                 user = None
                 messages.warning(request,'Username does not exists. Check the username or create an account.')
                 return redirect('user')
